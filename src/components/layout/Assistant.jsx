@@ -29,7 +29,7 @@ export const Assistant = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="assistant-popup">
+    <div className="assistant-panel">
       {/* Header */}
       <div className="assistant-header">
         <div className="assistant-header-left">
@@ -56,23 +56,22 @@ export const Assistant = ({ isOpen, onClose }) => {
           What do you need help with? Select a topic or type your question below.
         </p>
 
-        {/* Suggested Topic Button */}
-        <button className="assistant-topic-btn">
-          Where is my 1099 tax form?
-        </button>
-
-        {/* Follow-up Question */}
-        <p className="assistant-question">
-          For which year do you need your 1099 form?
-        </p>
-
-        {/* Option Buttons */}
-        <div className="assistant-options">
-          <button className="assistant-option-btn">
-            I need my most recent 1099 for this year (2025)
+        {/* Suggested Topic Buttons - Pill style */}
+        <div className="assistant-suggestions">
+          <button className="assistant-topic-btn">
+            Where is my 1099 tax form?
           </button>
-          <button className="assistant-option-btn">
-            I need my 1099 from a previous year (not 2025)
+          <button className="assistant-topic-btn">
+            My verification status
+          </button>
+          <button className="assistant-topic-btn">
+            My payout is missing
+          </button>
+          <button className="assistant-topic-btn">
+            Update bank account for payout
+          </button>
+          <button className="assistant-topic-btn">
+            My customer's payment is failing
           </button>
         </div>
       </div>
@@ -82,7 +81,7 @@ export const Assistant = ({ isOpen, onClose }) => {
         <div className="assistant-input-wrapper">
           <textarea
             className="assistant-input"
-            placeholder="Ask a question"
+            placeholder=""
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}
