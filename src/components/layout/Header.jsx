@@ -72,27 +72,10 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
             </div>
           </div>
 
-          {/* CENTER SECTION - Sandbox message */}
-          <div className="stripe-header-center">
-            <span className="sandbox-message">
-              Sandboxes are the new way to test.
-            </span>
-            <a href="#" className="sandbox-link">Try it</a>
-          </div>
-
           {/* RIGHT SECTION */}
           <div className="stripe-header-right">
             {/* Test Mode Toggle - EXACT Stripe toggle */}
-            <div className="test-mode-toggle">
-              <span className="test-mode-toggle-label">Test mode</span>
-              <button
-                className={cn("toggle-switch", testMode && "active")}
-                onClick={() => setTestMode(!testMode)}
-                aria-label="Toggle test mode"
-              >
-                <span className="toggle-slider" />
-              </button>
-            </div>
+            
 
             {/* Apps Grid Icon */}
             <button className="stripe-header-icon-btn" aria-label="Apps">
