@@ -16,7 +16,7 @@
   border-right: 1px solid #e3e8ee;
   transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 50;
-  overflow: hidden;
+  overflow: visible;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
 }
 
@@ -54,9 +54,7 @@
 }
 
 .tooltip-content {
-  position: absolute;
-  left: calc(100% + 12px);
-  top: 50%;
+  position: fixed;
   transform: translateY(-50%);
   background-color: #0a2540;
   color: #ffffff;
@@ -68,7 +66,7 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.1s ease 0.2s, visibility 0.1s ease 0.2s;
-  z-index: 9999;
+  z-index: 99999;
   pointer-events: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
 }
@@ -499,6 +497,58 @@
   border-left: 1px solid #e3e8ee;
 }
 
+/* ============================================
+   HOVER DROPDOWN MENU
+   ============================================ */
+
+.stripe-hover-dropdown {
+  position: fixed;
+  background-color: #ffffff;
+  border: 1px solid #e3e8ee;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 220px;
+  padding: 4px 0;
+  margin-left: 0;
+  overflow: hidden;
+  animation: fadeInDropdown 0.15s ease-in;
+}
+
+@keyframes fadeInDropdown {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.stripe-dropdown-item {
+  display: block;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0a2540;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+.stripe-dropdown-item:hover {
+  background-color: #f6f8fa;
+}
+
+.stripe-dropdown-item.active {
+  background-color: #f0f5ff;
+  color: #635bff;
+  font-weight: 500;
+}
+
 .stripe-sublink {
   display: flex;
   align-items: center;
@@ -851,4 +901,35 @@
 
 .stripe-sidebar[data-variant="mobile"] .sidebar-search {
   margin: 16px 24px;
+}
+
+/* ============================================
+   INLINE TOAST STYLES
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.inline-toast {
+  position: fixed;
+  background-color: #ffffff;
+  border: 1px solid #e3e8ee;
+  border-radius: 6px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+  color: #1a202c;
+  white-space: nowrap;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-in;
+  pointer-events: none;
 }
