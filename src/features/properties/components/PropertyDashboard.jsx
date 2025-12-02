@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { useProperty } from "@/features/property/context/PropertyContext";
+import { useResponsive } from "@/hooks/useResponsive";
 import { PropertyToolbar } from "./PropertyToolbar";
 import { PropertyTable, defaultPropertyColumns } from "./PropertyTable";
 import { PropertyCardGrid } from "./PropertyCardGrid";
@@ -9,6 +10,7 @@ import { Building2 } from "lucide-react";
 
 export function PropertyDashboard() {
     const { portfolio } = useProperty();
+    const { isMobile } = useResponsive();
     const [viewMode, setViewMode] = useState("table"); // table, card, grid
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -121,7 +123,7 @@ export function PropertyDashboard() {
                     onSearchChange={setSearchQuery}
                 />
 
-                {viewMode === "table" && (
+                {viewMode === "table" && !isMobile && (
                     <PropertyTable
                         data={filteredData}
                         columns={defaultPropertyColumns}
@@ -129,10 +131,10 @@ export function PropertyDashboard() {
                     />
                 )}
 
-                {(viewMode === "card" || viewMode === "grid") && (
+                {(viewMode === "card" || viewMode === "grid" || (viewMode === "table" && isMobile)) && (
                     <PropertyCardGrid
                         data={filteredData}
-                        mode={viewMode}
+                        mode={viewMode === "table" && isMobile ? "card" : viewMode}
                         onCardClick={(item) => console.log("Clicked card", item)}
                     />
                 )}

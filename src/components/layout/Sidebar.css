@@ -805,3 +805,50 @@
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
   }
 }
+
+/* ============================================
+   MOBILE VARIANT - Industry Standard
+   ============================================ */
+
+.stripe-sidebar[data-variant="mobile"] {
+  position: relative;
+  height: 100%;
+  width: 100% !important;
+  max-width: none; /* Let container control width */
+  border-right: none;
+  background-color: #ffffff;
+  padding-top: 16px;
+  box-shadow: none; /* Container has shadow usually */
+}
+
+.dark .stripe-sidebar[data-variant="mobile"] {
+  background-color: #0c1427;
+}
+
+.stripe-sidebar[data-variant="mobile"] .stripe-section-label {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.stripe-sidebar[data-variant="mobile"] .stripe-nav-link {
+  padding-left: 24px;
+  padding-right: 24px;
+  min-height: 48px; /* Larger touch target */
+}
+
+.stripe-sidebar[data-variant="mobile"] .stripe-sublinks {
+  margin-left: 38px; /* Adjusted for larger padding */
+}
+
+.stripe-sidebar[data-variant="mobile"] .business-selector {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.dark .stripe-sidebar[data-variant="mobile"] .business-selector {
+  border-bottom-color: #1a3a5c;
+}
+
+.stripe-sidebar[data-variant="mobile"] .sidebar-search {
+  margin: 16px 24px;
+}

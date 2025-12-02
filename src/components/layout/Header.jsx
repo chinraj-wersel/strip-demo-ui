@@ -113,7 +113,7 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
             </button>
 
             {/* Search Bar - EXACT Stripe style */}
-            <div className="stripe-header-search">
+            <div className="stripe-header-search hidden md:flex">
               <Search className="stripe-search-icon" />
               <input
                 type="text"
@@ -126,21 +126,21 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
           {/* RIGHT SECTION */}
           <div className="stripe-header-right">
             {/* Apps Grid Icon - Stripe style 2x2 grid with plus */}
-            <button className="stripe-header-icon-btn stripe-apps-btn" aria-label="Apps">
+            <button className="stripe-header-icon-btn stripe-apps-btn hidden md:flex" aria-label="Apps">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {/* 2x2 Grid of rounded squares */}
-                <rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9"/>
-                <rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9"/>
-                <rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9"/>
-                <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9"/>
+                <rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9" />
+                <rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9" />
+                <rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9" />
+                <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9" />
                 {/* Plus sign badge */}
-                <circle cx="15" cy="3" r="3" fill="#635bff"/>
-                <path d="M15 1.5V4.5M13.5 3H16.5" stroke="white" strokeWidth="1.2" strokeLinecap="round"/>
+                <circle cx="15" cy="3" r="3" fill="#635bff" />
+                <path d="M15 1.5V4.5M13.5 3H16.5" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
               </svg>
             </button>
 
             {/* Help Icon */}
-            <button 
+            <button
               className={cn("stripe-header-icon-btn", showAssistant && "active")}
               aria-label="Help"
               onClick={() => setShowAssistant(!showAssistant)}
@@ -150,7 +150,7 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
 
             {/* Notifications Bell Icon with Popup */}
             <div className="stripe-notifications-wrapper" ref={notificationsRef}>
-              <button 
+              <button
                 className={cn("stripe-header-icon-btn", showNotifications && "active")}
                 aria-label="Notifications"
                 onClick={() => setShowNotifications(!showNotifications)}
@@ -165,15 +165,15 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
                     <h3>Notifications</h3>
                     <button className="notifications-preferences-btn">View preferences</button>
                   </div>
-                  
+
                   <div className="notifications-tabs">
-                    <button 
+                    <button
                       className={cn("notifications-tab", notificationTab === 'unread' && "active")}
                       onClick={() => setNotificationTab('unread')}
                     >
                       Unread
                     </button>
-                    <button 
+                    <button
                       className={cn("notifications-tab", notificationTab === 'all' && "active")}
                       onClick={() => setNotificationTab('all')}
                     >
@@ -196,8 +196,8 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
             </div>
 
             {/* Settings Icon */}
-            <button 
-              className="stripe-header-icon-btn" 
+            <button
+              className="stripe-header-icon-btn"
               aria-label="Settings"
               onClick={() => navigate(ROUTES.SETTINGS)}
             >
@@ -206,7 +206,7 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
 
             {/* Add New Button - Purple circle with dropdown */}
             <div className="stripe-add-wrapper" ref={addMenuRef}>
-              <button 
+              <button
                 className={cn("stripe-add-btn", showAddMenu && "active")}
                 aria-label="Add new"
                 onClick={() => setShowAddMenu(!showAddMenu)}
@@ -218,8 +218,8 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
               {showAddMenu && (
                 <div className="stripe-add-menu">
                   {addMenuItems.map((item, index) => (
-                    <Link 
-                      key={index} 
+                    <Link
+                      key={index}
                       to={item.link}
                       className="stripe-add-menu-item"
                       onClick={() => setShowAddMenu(false)}
@@ -234,11 +234,11 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
             </div>
 
             {/* Setup Guide Button with Progress Ring */}
-            <button 
+            <button
               className={cn("stripe-setup-btn", showSetupGuide && "active")}
               onClick={() => setShowSetupGuide(!showSetupGuide)}
             >
-              <span>Setup guide</span>
+              <span className="hidden md:inline">Setup guide</span>
               <div className="setup-progress">
                 <svg className="progress-ring" viewBox="0 0 20 20">
                   <circle
@@ -267,9 +267,9 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
       </header>
 
       {/* Setup Guide Popup */}
-      <SetupGuide 
-        isOpen={showSetupGuide} 
-        onClose={() => setShowSetupGuide(false)} 
+      <SetupGuide
+        isOpen={showSetupGuide}
+        onClose={() => setShowSetupGuide(false)}
       />
 
       {/* Assistant Chat Popup */}
