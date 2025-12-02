@@ -8,7 +8,7 @@
 .stripe-sidebar {
   position: fixed;
   left: 0;
-  top: 40px; /* Below 40px test banner */
+  /* top: 40px; Below 40px test banner */
   height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;

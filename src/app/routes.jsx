@@ -23,6 +23,7 @@ import { AssetsRegistry } from "../features/property/components/AssetsRegistry.j
 import { ComplianceOverview } from "../features/property/components/ComplianceOverview.jsx";
 import { AlertsCenter } from "../features/property/components/AlertsCenter.jsx";
 import { SystemConsole } from "../features/property/components/SystemConsole.jsx";
+import { SettingsPage } from "../pages/SettingsPage.jsx";
 
 export const router = createBrowserRouter([
   // Root redirect to signin
@@ -207,6 +208,18 @@ export const router = createBrowserRouter([
             <SystemConsole />
           </PropertyProvider>
         ),
+      },
+    ],
+  },
+  {
+    path: ROUTES.SETTINGS,
+    element: (
+        <MainLayout />
+    ),
+    children: [
+      {
+        index: true,
+        element: <SettingsPage />,
       },
     ],
   },

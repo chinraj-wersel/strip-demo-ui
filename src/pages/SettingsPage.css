@@ -1,0 +1,230 @@
+/* ============================================
+   SETTINGS PAGE - Exact Stripe Style
+   ============================================ */
+
+.settings-page {
+  padding-bottom: 48px;
+  margin-bottom: 90px;
+}
+
+.settings-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Settings Section */
+.settings-section {
+  margin-bottom: 0;
+}
+
+.settings-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3c4257;
+  margin: 0;
+  padding: 24px 0 16px 0;
+  line-height: 20px;
+}
+
+.settings-section-title span {
+  display: block;
+}
+
+.dark .settings-section-title {
+  color: #c1c9d2;
+}
+
+/* Settings Grid - 3 columns matching Stripe */
+.settings-section-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: none;
+}
+
+.dark .settings-section-grid {
+  border-top: none;
+}
+
+@media (max-width: 1024px) {
+  .settings-section-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .settings-section-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .settings-content {
+    padding: 0 16px;
+  }
+}
+
+/* Settings Item - Exact Stripe match */
+.settings-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px 20px 0;
+  background: transparent;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+  border: none;
+  min-height: 88px;
+}
+
+.settings-item:hover {
+  background-color: #f7fafc;
+}
+
+.dark .settings-item {
+  border: none;
+}
+
+.dark .settings-item:hover {
+  background-color: #0d2f4f;
+}
+
+/* Settings Item Icon - Stripe style box */
+.settings-item-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background-color: #f7fafc;
+  border: none;
+  flex-shrink: 0;
+}
+
+.settings-item-icon .settings-icon-svg {
+  width: 16px;
+  height: 16px;
+  color: #3c4257;
+}
+
+.dark .settings-item-icon {
+  background-color: #1a3a5c;
+  border: none;
+}
+
+.dark .settings-item-icon .settings-icon-svg {
+  color: #8898aa;
+}
+
+/* Special icon style for "Discover more features" */
+.settings-item-icon.special {
+  background-color: #f0f5ff;
+  border: none;
+}
+
+.settings-item-icon.special .settings-icon-svg {
+  color: #635bff;
+}
+
+.dark .settings-item-icon.special {
+  background-color: #1a1a3c;
+  border: none;
+}
+
+.dark .settings-item-icon.special .settings-icon-svg {
+  color: #7a73ff;
+}
+
+/* Special item styling */
+.settings-item.special {
+  background-color: #fafbff;
+}
+
+.settings-item.special:hover {
+  background-color: #f0f5ff;
+}
+
+.dark .settings-item.special {
+  background-color: #0a1a2f;
+}
+
+.dark .settings-item.special:hover {
+  background-color: #1a1a3c;
+}
+
+/* Settings Item Content */
+.settings-item-content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.settings-item-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #635bff;
+  margin: 0 0 4px 0;
+  line-height: 20px;
+}
+
+.dark .settings-item-title {
+  color: #7a73ff;
+}
+
+.settings-item-description {
+  font-size: 14px;
+  font-weight: 400;
+  color: #3c4257;
+  margin: 0;
+  line-height: 20px;
+}
+
+.dark .settings-item-description {
+  color: #8898aa;
+}
+
+/* Footer Links */
+.settings-footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 24px 0;
+  font-size: 14px;
+  color: #3c4257;
+}
+
+.settings-footer-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #635bff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.settings-footer-link:hover {
+  color: #5851db;
+  text-decoration: underline;
+}
+
+.dark .settings-footer-link {
+  color: #7a73ff;
+}
+
+.dark .settings-footer-link:hover {
+  color: #9d97ff;
+}
+
+.settings-footer-separator {
+  color: #8898aa;
+  margin: 0 4px;
+}
+
+.dark .settings-footer-separator {
+  color: #6b7c93;
+}

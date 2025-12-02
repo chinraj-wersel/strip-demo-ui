@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import { Sidebar } from "./Sidebar.jsx";
 import { Header } from "./Header.jsx";
 import { MobileMenu } from "./MobileMenu.jsx";
+import { BottomBar } from "./BottomBar.jsx";
 import { useResponsive } from "@/hooks/useResponsive";
 import { cn } from "@/lib/utils";
 
@@ -52,6 +53,9 @@ export const MainLayout = () => {
           </div>
         </main>
       </div>
+
+      {/* Full Width Bottom Bar */}
+      {/* <BottomBar /> */}
     </div>
   );
 };
