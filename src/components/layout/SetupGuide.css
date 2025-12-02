@@ -4,7 +4,7 @@
 
 .setup-guide-popup {
   position: fixed;
-  top: 66px; /* Right below header (40px banner + 56px header + 4px gap) */
+  bottom: 22px; /* Bottom right corner */
   right: 22px;
   width: 320px;
   background-color: #ffffff;
@@ -18,7 +18,7 @@
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
