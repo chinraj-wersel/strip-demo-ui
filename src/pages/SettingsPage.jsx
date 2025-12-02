@@ -78,7 +78,7 @@ export const SettingsPage = () => {
           <SettingsItem
             icon={Gauge}
             title="Your plans"
-            description="Manage how you pay for Stripe services."
+            description="Manage how you pay for xperty services."
           />
           <SettingsItem
             icon={FileText}

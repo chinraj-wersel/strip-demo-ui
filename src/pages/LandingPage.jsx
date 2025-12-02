@@ -92,7 +92,7 @@ export const LandingPage = () => {
                 <Building2 className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
-                Experty
+                Xperty
               </span>
             </div>
             
@@ -398,7 +398,7 @@ export const LandingPage = () => {
               Ready to simplify your property management?
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-10">
-              Join thousands of landlords who trust Experty to manage their properties. Start your free trial today — no credit card required.
+              Join thousands of landlords who trust Xperty to manage their properties. Start your free trial today — no credit card required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
@@ -432,7 +432,7 @@ export const LandingPage = () => {
                 <div className="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center">
                   <Building2 className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold">Experty</span>
+                <span className="text-xl font-bold">Xperty</span>
               </div>
               <p className="text-slate-400 text-sm">
                 The modern property management platform for landlords who want to grow.
@@ -464,7 +464,7 @@ export const LandingPage = () => {
           {/* Bottom */}
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-slate-500 text-sm">
-              © 2024 Experty. All rights reserved.
+              © 2024 Xperty. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <a href="#" className="text-slate-400 hover:text-white transition-colors">

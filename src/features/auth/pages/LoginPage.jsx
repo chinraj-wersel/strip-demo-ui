@@ -48,8 +48,8 @@ const MicrosoftIcon = () => (
   </svg>
 );
 
-// Experty Logo Component
-// const ExpertyLogo = () => (
+// Xperty Logo Component
+// const XpertyLogo = () => (
 //   <div className="flex items-center gap-2 mb-8">
 //     <div className="grid grid-cols-2 gap-1 w-8 h-8">
 //       <div className="w-3 h-3 bg-purple-600 rounded-sm"></div>
@@ -61,7 +61,7 @@ const MicrosoftIcon = () => (
 //       <div className="w-3 h-3 bg-purple-600 rounded-sm"></div>
 //       <div className="w-3 h-3 bg-purple-600 rounded-sm"></div>
 //     </div>
-//     <span className="text-2xl font-bold text-gray-900">Experty</span>
+//     <span className="text-2xl font-bold text-gray-900">Xperty</span>
 //   </div>
 // );
 
@@ -197,10 +197,10 @@ export const LoginPage = () => {
       {/* Right Side - Login Form */}
       <div className="flex-1 flex items-center justify-center bg-white p-4 lg:p-8 min-h-[calc(100vh-12rem)] lg:min-h-screen">
         <div className="w-full max-w-md py-8 lg:py-0">
-          {/* <ExpertyLogo /> */}
+          {/* <XpertyLogo /> */}
 
           <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
-            Sign up to Experty Dashboard
+            Sign up to Xperty Dashboard
           </h1>
           <p className="text-gray-600 mb-8 text-sm lg:text-base">
             Sign up with social account or enter your details.
@@ -245,7 +245,7 @@ export const LoginPage = () => {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="example@experty.com"
+                placeholder="example@Xperty.com"
                 value={formData.email}
                 onChange={handleChange}
                 disabled={isLoading}

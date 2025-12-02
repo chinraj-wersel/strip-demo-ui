@@ -1,5 +1,5 @@
 /* ============================================
-   WELCOME MODAL - Stripe Style
+   WELCOME MODAL - xperty Style
    Centered popup with gradient preview
    ============================================ */
 
@@ -273,7 +273,7 @@
   border-radius: 8px;
 }
 
-.preview-stripe-logo {
+.preview-xperty-logo {
   position: absolute;
   bottom: 40px;
   right: 40px;

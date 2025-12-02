@@ -17,7 +17,7 @@ export const SystemConsole = () => {
   return (
     <>
       {/* Toggle Button */}
-      <button
+      {/* <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-5 right-5 w-14 h-14 bg-gray-900 hover:bg-gray-800 border border-gray-700 rounded-full flex items-center justify-center shadow-2xl z-40 transition-all"
         title="System Log"
@@ -40,7 +40,7 @@ export const SystemConsole = () => {
             {logs.length}
           </span>
         )}
-      </button>
+      </button> */}
 
       {/* Console Popup */}
       {isOpen && (

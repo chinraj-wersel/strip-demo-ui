@@ -1,9 +1,9 @@
 /* ============================================
-   STRIPE BOTTOM BAR - Full Width Footer
+   xperty BOTTOM BAR - Full Width Footer
    Fixed at bottom of viewport
    ============================================ */
 
-.stripe-bottom-bar {
+.xperty-bottom-bar {
   position: fixed;
   bottom: 0;
   left: 0; /* Full width - outside sidebar layout */
@@ -90,7 +90,7 @@
 }
 
 /* Dark Mode */
-.dark .stripe-bottom-bar {
+.dark .xperty-bottom-bar {
   background-color: #0a2540;
   border-top: none;
 }
@@ -123,7 +123,7 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .stripe-bottom-bar {
+  .xperty-bottom-bar {
     padding: 0 16px;
   }
   

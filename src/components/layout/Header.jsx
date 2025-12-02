@@ -75,10 +75,10 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
   return (
     <>
       {/* ============================================
-          TEST MODE BANNER - EXACT STRIPE MATCH
+          TEST MODE BANNER - EXACT xperty MATCH
           Height: 40px | Background: #ff5722
           ============================================ */}
-      {/* <div className="stripe-test-banner">
+      {/* <div className="xperty-test-banner">
         <span className="test-mode-label">Test mode</span>
         <span className="test-mode-message">
           You're using test data. To accept payments, complete your business profile.
@@ -90,77 +90,76 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
       </div> */}
 
       {/* ============================================
-          MAIN HEADER - EXACT STRIPE MATCH
+          MAIN HEADER - EXACT xperty MATCH
           Height: 56px | Background: #ffffff
           ============================================ */}
       <header
         className={cn(
-          "stripe-header",
+          "xperty-header",
           sidebarCollapsed ? "sidebar-collapsed" : "sidebar-expanded"
         )}
       >
-        <div className="stripe-header-inner">
+        <div className="xperty-header-inner">
           {/* LEFT SECTION */}
-          <div className="stripe-header-left">
+          <div className="xperty-header-left">
             {/* Hamburger Menu - Mobile only */}
             <button
               type="button"
               onClick={onMenuClick}
-              className="stripe-mobile-menu-btn"
+              className="xperty-mobile-menu-btn"
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5" />
             </button>
 
-            {/* Search Bar - EXACT Stripe style */}
-            <div className="stripe-header-search hidden md:flex">
-              <Search className="stripe-search-icon" />
+            {/* Search Bar - EXACT xperty style */}
+            <div className="xperty-header-search hidden md:flex">
+              <Search className="xperty-search-icon" />
               <input
                 type="text"
                 placeholder="Search"
-                className="stripe-search-input"
+                className="xperty-search-input"
               />
             </div>
           </div>
 
           {/* RIGHT SECTION */}
-          <div className="stripe-header-right">
-            {/* Apps Grid Icon - Stripe style 2x2 grid with plus */}
-            <button className="stripe-header-icon-btn stripe-apps-btn hidden md:flex" aria-label="Apps">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* 2x2 Grid of rounded squares */}
-                <rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9" />
-                <rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9" />
-                <rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9" />
-                <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9" />
-                {/* Plus sign badge */}
-                <circle cx="15" cy="3" r="3" fill="#635bff" />
-                <path d="M15 1.5V4.5M13.5 3H16.5" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
-              </svg>
-            </button>
+          <div className="xperty-header-right">
+            {/* Apps Grid Icon - xperty style 2x2 grid with plus */}
+            
 
             {/* Help Icon */}
             <button
-              className={cn("stripe-header-icon-btn", showAssistant && "active")}
+              className={cn("xperty-header-icon-btn", showAssistant && "active")}
               aria-label="Help"
-              onClick={() => setShowAssistant(!showAssistant)}
+              onClick={() => {
+                setShowAssistant(!showAssistant);
+                if (!showAssistant) {
+                  setShowNotifications(false);
+                }
+              }}
             >
               <HelpCircle className="w-[18px] h-[18px]" />
             </button>
 
             {/* Notifications Bell Icon with Popup */}
-            <div className="stripe-notifications-wrapper" ref={notificationsRef}>
+            <div className="xperty-notifications-wrapper" ref={notificationsRef}>
               <button
-                className={cn("stripe-header-icon-btn", showNotifications && "active")}
+                className={cn("xperty-header-icon-btn", showNotifications && "active")}
                 aria-label="Notifications"
-                onClick={() => setShowNotifications(!showNotifications)}
+                onClick={() => {
+                  setShowNotifications(!showNotifications);
+                  if (!showNotifications) {
+                    setShowAssistant(false);
+                  }
+                }}
               >
                 <Bell className="w-[18px] h-[18px]" />
               </button>
 
               {/* Notifications Popup */}
               {showNotifications && (
-                <div className="stripe-notifications-popup">
+                <div className="xperty-notifications-popup">
                   <div className="notifications-header">
                     <h3>Notifications</h3>
                     <button className="notifications-preferences-btn">View preferences</button>
@@ -197,7 +196,7 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
 
             {/* Settings Icon */}
             <button
-              className="stripe-header-icon-btn"
+              className="xperty-header-icon-btn"
               aria-label="Settings"
               onClick={() => navigate(ROUTES.SETTINGS)}
             >
@@ -205,9 +204,9 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
             </button>
 
             {/* Add New Button - Purple circle with dropdown */}
-            <div className="stripe-add-wrapper" ref={addMenuRef}>
+            <div className="xperty-add-wrapper" ref={addMenuRef}>
               <button
-                className={cn("stripe-add-btn", showAddMenu && "active")}
+                className={cn("xperty-add-btn", showAddMenu && "active")}
                 aria-label="Add new"
                 onClick={() => setShowAddMenu(!showAddMenu)}
               >
@@ -216,17 +215,17 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
 
               {/* Add Menu Popup */}
               {showAddMenu && (
-                <div className="stripe-add-menu">
+                <div className="xperty-add-menu">
                   {addMenuItems.map((item, index) => (
                     <Link
                       key={index}
                       to={item.link}
-                      className="stripe-add-menu-item"
+                      className="xperty-add-menu-item"
                       onClick={() => setShowAddMenu(false)}
                     >
-                      <item.icon className="stripe-add-menu-icon" />
-                      <span className="stripe-add-menu-label">{item.label}</span>
-                      <span className="stripe-add-menu-shortcut">{item.shortcut}</span>
+                      <item.icon className="xperty-add-menu-icon" />
+                      <span className="xperty-add-menu-label">{item.label}</span>
+                      <span className="xperty-add-menu-shortcut">{item.shortcut}</span>
                     </Link>
                   ))}
                 </div>
@@ -235,7 +234,7 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
 
             {/* Setup Guide Button with Progress Ring */}
             <button
-              className={cn("stripe-setup-btn", showSetupGuide && "active")}
+              className={cn("xperty-setup-btn", showSetupGuide && "active")}
               onClick={() => setShowSetupGuide(!showSetupGuide)}
             >
               <span className="hidden md:inline">Setup guide</span>

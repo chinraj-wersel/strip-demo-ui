@@ -1,5 +1,5 @@
 /* ============================================
-   SETTINGS PAGE - Exact Stripe Style
+   SETTINGS PAGE - Exact xperty Style
    ============================================ */
 
 .settings-page {
@@ -35,7 +35,7 @@
   color: #c1c9d2;
 }
 
-/* Settings Grid - 3 columns matching Stripe */
+/* Settings Grid - 3 columns matching xperty */
 .settings-section-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -63,7 +63,7 @@
   }
 }
 
-/* Settings Item - Exact Stripe match */
+/* Settings Item - Exact xperty match */
 .settings-item {
   display: flex;
   align-items: flex-start;
@@ -89,7 +89,7 @@
   background-color: #0d2f4f;
 }
 
-/* Settings Item Icon - Stripe style box */
+/* Settings Item Icon - xperty style box */
 .settings-item-icon {
   width: 32px;
   height: 32px;

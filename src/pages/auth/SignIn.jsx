@@ -190,15 +190,21 @@ export const SignIn = () => {
         <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-tr from-[#635bff] via-[#ff7067] to-[#ffc800] transform -skew-y-6 origin-top-left scale-110 translate-y-[-100px]"></div>
       </div>
 
+      {/* Logo - Top Left */}
+      <div className="absolute top-6 left-44 z-20">
+        <h1 className="text-2xl font-semibold text-white tracking-tight">Xperty</h1>
+      </div>
+
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-start pt-12 sm:pt-24 px-4">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-start pt-12 sm:pt-20 px-4">
         {/* Logo */}
         {/* <div className="mb-12">
-          <h1 className="text-3xl font-bold text-white tracking-tight">stripe</h1>
+          <h1 className="text-3xl font-bold text-white tracking-tight">Xpery</h1>
         </div> */}
 
         {/* Card */}
-        <div className="w-full max-w-[440px] bg-white rounded-lg shadow-[0_15px_35px_rgba(50,50,93,0.1),0_5px_15px_rgba(0,0,0,0.07)] p-8 sm:p-12">
+        <div className="w-full max-w-[550px] bg-white rounded-lg shadow-[0_15px_35px_rgba(50,50,93,0.1),0_5px_15px_rgba(0,0,0,0.07)] ">
+          <div className="p-8 sm:p-12">
           <h2 className="text-2xl font-semibold text-[#1a1f36] mb-6">Sign in to your account</h2>
 
           {/* General Error Message */}
@@ -272,7 +278,7 @@ export const SignIn = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-10 bg-[#635bff] hover:bg-[#0a2540] text-white font-medium transition-all shadow-sm"
+              className="w-full h-10 bg-[#635bff] text-white font-medium transition-all shadow-sm"
             >
               {isLoading ? (
                 <>
@@ -319,18 +325,23 @@ export const SignIn = () => {
             >
               Sign in with SSO
             </Button>
+           
           </div>
+         
         </div>
+        <div className="text-sm text-[#3c4257] bg-[#f7f9fc] py-4 w-full text-center">
+          New to Xperty? <Link to={ROUTES.REGISTER} className="text-[#635bff] hover:text-[#0a2540]">Create account</Link>
+        </div>
+        </div>
+         
 
         {/* Footer Link */}
-        <div className="mt-8 text-sm text-[#3c4257] bg-[#f7f9fc] py-4 w-full text-center">
-          New to Stripe? <Link to={ROUTES.REGISTER} className="text-[#635bff] hover:text-[#0a2540]">Create account</Link>
-        </div>
+        
       </div>
 
       {/* Bottom Footer */}
-      <div className="mt-auto pb-6 pl-6 text-sm text-[#697386] flex gap-4 z-10">
-        <span>© Stripe</span>
+      <div className="mt-auto pb-6 pl-44 text-sm text-[#697386] flex gap-4 z-10 mt-12">
+        <span>© Xperty</span>
         <Link to="#" className="hover:text-[#3c4257]">Privacy & terms</Link>
       </div>
     </div>

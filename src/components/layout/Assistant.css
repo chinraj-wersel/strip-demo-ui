@@ -1,10 +1,10 @@
 /* ============================================
-   ASSISTANT SIDEBAR PANEL - Stripe Style
+   ASSISTANT SIDEBAR PANEL - xperty Style
    ============================================ */
 
 .assistant-panel {
   position: fixed;
-  top: 56px; /* Below header */
+  top: 70px; /* Below header */
   right: 0;
   bottom: 0;
   width: 320px;

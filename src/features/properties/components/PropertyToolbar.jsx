@@ -92,11 +92,11 @@ export function PropertyToolbar({
                         onValueChange={(val) => val && onViewModeChange(val)}
                         className="border border-slate-200 rounded-md p-1 bg-slate-50 gap-1"
                     >
-                        <ToggleGroupItem value="table" aria-label="Table view" className="h-8 w-8 p-0 data-[state=on]:bg-white data-[state=on]:shadow-sm">
-                            <List className="h-4 w-4" />
-                        </ToggleGroupItem>
                         <ToggleGroupItem value="card" aria-label="Card view" className="h-8 w-8 p-0 data-[state=on]:bg-white data-[state=on]:shadow-sm">
                             <LayoutGrid className="h-4 w-4" />
+                        </ToggleGroupItem>
+                        <ToggleGroupItem value="table" aria-label="Table view" className="h-8 w-8 p-0 data-[state=on]:bg-white data-[state=on]:shadow-sm">
+                            <List className="h-4 w-4" />
                         </ToggleGroupItem>
                         <ToggleGroupItem value="grid" aria-label="Grid view" className="h-8 w-8 p-0 data-[state=on]:bg-white data-[state=on]:shadow-sm">
                             <Grid className="h-4 w-4" />

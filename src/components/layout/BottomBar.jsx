@@ -12,7 +12,7 @@ import "./BottomBar.css";
 
 export const BottomBar = () => {
   return (
-    <div className="stripe-bottom-bar">
+    <div className="xperty-bottom-bar">
       {/* Developers Link - Left Side */}
       <div className="bottom-bar-left">
         <Link to="#" className="bottom-bar-link">

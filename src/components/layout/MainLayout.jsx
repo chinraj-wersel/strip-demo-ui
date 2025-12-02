@@ -7,6 +7,7 @@ import { MobileMenu } from "./MobileMenu.jsx";
 import { BottomBar } from "./BottomBar.jsx";
 import { useResponsive } from "@/hooks/useResponsive";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
 export const MainLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -25,7 +26,7 @@ export const MainLayout = () => {
   }
 
   return (
-    <div className="stripe-layout">
+    <div className="xperty-layout">
       <Sidebar
         collapsed={sidebarCollapsed}
         className="hidden lg:flex"
@@ -43,12 +44,12 @@ export const MainLayout = () => {
 
       <div
         className={cn(
-          "stripe-main-container",
+          "xperty-main-container",
           sidebarCollapsed ? "sidebar-collapsed" : "sidebar-expanded"
         )}
       >
-        <main className="stripe-main-content">
-          <div className="stripe-content-wrapper">
+        <main className="xperty-main-content">
+          <div className="xperty-content-wrapper">
             <Outlet />
           </div>
         </main>
@@ -56,6 +57,9 @@ export const MainLayout = () => {
 
       {/* Full Width Bottom Bar */}
       {/* <BottomBar /> */}
+      
+      {/* Toast Notifications */}
+      <Toaster />
     </div>
   );
 };

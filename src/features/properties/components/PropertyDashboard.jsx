@@ -11,7 +11,7 @@ import { Building2 } from "lucide-react";
 export function PropertyDashboard() {
     const { portfolio } = useProperty();
     const { isMobile } = useResponsive();
-    const [viewMode, setViewMode] = useState("table"); // table, card, grid
+    const [viewMode, setViewMode] = useState("card"); // table, card, grid
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [filters, setFilters] = useState({

@@ -2,8 +2,10 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ROUTES } from "@/app/constants";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { Switch } from "@/components/ui/switch";
 import {
-  Home,
+  LayoutGrid,
   Wallet,
   ArrowLeftRight,
   Users,
@@ -17,17 +19,19 @@ import {
   ChevronDown,
   ChevronRight,
   ChevronLeft,
+  ChevronsLeft,
   Search,
   Plus,
   Settings,
   Building2,
-  PanelLeftClose,
-  PanelLeft,
   DollarSign,
   Wrench,
   Folder,
   MessageSquare,
   HelpCircle,
+  LogOut,
+  Info,
+  User,
 } from "lucide-react";
 import "./Sidebar.css";
  
@@ -37,7 +41,7 @@ const NAVIGATION = [
     items: [
       {
         title: "Dashboard",
-        icon: Home,
+        icon: LayoutGrid,
         href: ROUTES.DASHBOARD,
       },
       {
@@ -56,7 +60,7 @@ const NAVIGATION = [
       },
       {
         title: "Financials",
-        icon: DollarSign,
+        icon: FileText,
         href: ROUTES.ASSETS,
       },
       {
@@ -170,21 +174,69 @@ const InlineToast = ({ message, position, onClose }) => {
   );
 };
  
+// Toggle Button with Toast Component
+const ToggleButtonWithToast = ({ collapsed, onToggleCollapse }) => {
+  const { toast } = useToast();
+
+  const handleMouseEnter = () => {
+    toast({
+      title: collapsed ? "Expand sidebar" : "Collapse sidebar",
+      // description: collapsed ? "Click to expand the sidebar" : "Click to collapse the sidebar",
+    });
+  };
+
+  return (
+    <button
+      className={`xperty-toggle-btn ${collapsed ? "collapsed" : ""}`}
+      onClick={onToggleCollapse}
+      onMouseEnter={handleMouseEnter}
+      aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+    >
+      <ChevronsLeft className="xperty-toggle-icon" />
+    </button>
+  );
+};
+
 // Business Selector Component
 const BusinessSelector = ({ collapsed }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [testMode, setTestMode] = useState(true);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
   const dropdownRef = useRef(null);
- 
+  const buttonRef = useRef(null);
+  const { user, logout } = useAuth();
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && 
+          buttonRef.current && !buttonRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
- 
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setDropdownPosition({
+        top: rect.bottom + 13,
+        left: rect.left,
+        width: rect.width,
+      });
+    }
+  }, [isOpen]);
+
+  const handleSignOut = () => {
+    logout();
+    setIsOpen(false);
+  };
+
+  const userName = user ? `${user.first_name || 'VIGNESH'} ${user.last_name || 'M'}` : 'VIGNESH M';
+
   if (collapsed) {
     return (
       <Tooltip text="New business" collapsed={collapsed}>
@@ -198,10 +250,11 @@ const BusinessSelector = ({ collapsed }) => {
       </Tooltip>
     );
   }
- 
+
   return (
     <div className="business-selector" ref={dropdownRef}>
       <button
+        ref={buttonRef}
         className="business-selector-btn"
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -212,18 +265,72 @@ const BusinessSelector = ({ collapsed }) => {
         <ChevronDown className={`business-chevron ${isOpen ? 'open' : ''}`} />
       </button>
       {isOpen && (
-        <div className="business-dropdown">
-          <div className="business-dropdown-item active">
-            <div className="business-avatar small">
-              <span>N</span>
+        <div 
+          className="business-dropdown"
+          style={{
+            position: 'fixed',
+            top: `${dropdownPosition.top}px`,
+            left: `${dropdownPosition.left}px`,
+            width:"220px",
+          }}
+        >
+          {/* Business Header */}
+          <div className="business-dropdown-header">
+            <div className="business-dropdown-avatar">
+              <span>NB</span>
             </div>
-            <span>New business</span>
+            <div className="business-dropdown-name">New business</div>
           </div>
+
+          {/* Exit Test Mode Button */}
+          {/* {testMode && (
+            <button className="business-exit-test-mode" onClick={() => setTestMode(false)}>
+              Exit test mode
+            </button>
+          )} */}
+
+          {/* Menu Options */}
+          <div className="business-dropdown-menu">
+            <Link 
+              to={ROUTES.SETTINGS} 
+              className="business-dropdown-item"
+              onClick={() => setIsOpen(false)}
+            >
+              <Settings className="w-4 h-4" />
+              <span>Settings</span>
+            </Link>
+
+            {/* <div className="business-dropdown-item business-dropdown-toggle">
+              <span>Test mode</span>
+              <Switch
+                checked={testMode}
+                onCheckedChange={setTestMode}
+                className="data-[state=checked]:bg-[#ff5722]"
+              />
+            </div> */}
+
+            {/* <button className="business-dropdown-item">
+              <Plus className="w-4 h-4" />
+              <span>Create account</span>
+            </button> */}
+          </div>
+
+          {/* Separator */}
           <div className="business-dropdown-divider" />
-          <button className="business-dropdown-item add-new">
-            <Plus className="w-4 h-4" />
-            <span>New account</span>
-          </button>
+
+          {/* User Actions */}
+          <div className="business-dropdown-menu">
+            <div className="business-dropdown-item business-dropdown-user">
+              <User className="w-4 h-4" />
+              <span>{userName}</span>
+              <Info className="w-3.5 h-3.5 text-slate-400 ml-auto" />
+            </div>
+
+            <button className="business-dropdown-item" onClick={handleSignOut}>
+              <LogOut className="w-4 h-4" />
+              <span>Sign out</span>
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -278,13 +385,13 @@ const NavLink = ({ item, active, onNavigate, collapsed, hasChildren, isExpanded,
           onNavigate();
         }
       }}
-      className={`stripe-nav-link ${active ? "active" : ""} ${collapsed ? "collapsed" : ""} ${hasChildren ? "has-children" : ""}`}
+      className={`xperty-nav-link ${active ? "active" : ""} ${collapsed ? "collapsed" : ""} ${hasChildren ? "has-children" : ""}`}
     >
-      <Icon className="stripe-nav-icon" />
+      <Icon className="xperty-nav-icon" />
       {!collapsed && (
         <>
-          <span className="stripe-nav-text">{item.title}</span>
-          <ChevronRight className="stripe-nav-chevron" style={{ width: '16px', height: '16px', marginLeft: 'auto' }} />
+          <span className="xperty-nav-text">{item.title}</span>
+          <ChevronRight className="xperty-nav-chevron" style={{ width: '16px', height: '16px', marginLeft: 'auto' }} />
         </>
       )}
     </Link>
@@ -293,10 +400,10 @@ const NavLink = ({ item, active, onNavigate, collapsed, hasChildren, isExpanded,
       ref={linkRef}
       to={item.href}
       onClick={handleClick}
-      className={`stripe-nav-link ${active ? "active" : ""} ${collapsed ? "collapsed" : ""}`}
+      className={`xperty-nav-link ${active ? "active" : ""} ${collapsed ? "collapsed" : ""}`}
     >
-      <Icon className="stripe-nav-icon" />
-      {!collapsed && <span className="stripe-nav-text">{item.title}</span>}
+      <Icon className="xperty-nav-icon" />
+      {!collapsed && <span className="xperty-nav-text">{item.title}</span>}
     </Link>
   );
  
@@ -331,9 +438,9 @@ const SubLink = ({ child, active, onNavigate, collapsed, onMenuClick }) => {
       ref={linkRef}
       to={child.href}
       onClick={handleClick}
-      className={`stripe-sublink ${active ? "active" : ""} ${collapsed ? "collapsed" : ""}`}
+      className={`xperty-sublink ${active ? "active" : ""} ${collapsed ? "collapsed" : ""}`}
     >
-      <span className="stripe-sublink-text">{child.title}</span>
+      <span className="xperty-sublink-text">{child.title}</span>
     </Link>
   );
 };
@@ -358,7 +465,7 @@ const MenuItemWrapper = ({ item, location, collapsed, openItems, toggleAccordion
  
   return (
     <div
-      className="stripe-item-wrapper"
+      className="xperty-item-wrapper"
       ref={wrapperRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -376,7 +483,7 @@ const MenuItemWrapper = ({ item, location, collapsed, openItems, toggleAccordion
       {/* Hover dropdown menu - works in both expanded and collapsed states */}
       {hasChildren && isHovered && (
         <div
-          className="stripe-hover-dropdown"
+          className="xperty-hover-dropdown"
           style={{
             position: 'fixed',
             top: `${dropdownPosition.top}px`,
@@ -398,7 +505,7 @@ const MenuItemWrapper = ({ item, location, collapsed, openItems, toggleAccordion
                   handleNavigate();
                 }
               }}
-              className={`stripe-dropdown-item ${location.pathname === child.href ? 'active' : ''}`}
+              className={`xperty-dropdown-item ${location.pathname === child.href ? 'active' : ''}`}
             >
               {child.title}
             </Link>
@@ -485,7 +592,7 @@ export const Sidebar = ({
     }
   };
  
-  const sidebarClasses = `stripe-sidebar ${collapsed ? "collapsed" : "expanded"} ${className}`.trim();
+  const sidebarClasses = `xperty-sidebar ${collapsed ? "collapsed" : "expanded"} ${className}`.trim();
  
   return (
     <>
@@ -501,84 +608,83 @@ export const Sidebar = ({
         data-collapsed={collapsed || undefined}
         data-variant={variant}
       >
-      {/* Business Selector */}
-      <BusinessSelector collapsed={collapsed} />
- 
-      {/* Search */}
-      {/* <SidebarSearch collapsed={collapsed} /> */}
- 
-      {/* Navigation */}
-      <div className={`stripe-sidebar-scroll ${collapsed ? "collapsed" : ""}`}>
-        <div className="stripe-sidebar-sections">
-          {navSections.map((section, sectionIndex) => (
-            <div key={section.label} className="stripe-sidebar-section">
-              {!collapsed && section.label !== "MAIN" && (
-                <p className="stripe-section-label">{section.label}</p>
-              )}
-              <div className="stripe-nav-links">
-                {section.items.map((item) => (
-                  <MenuItemWrapper
-                    key={item.title}
-                    item={item}
-                    location={location}
-                    collapsed={collapsed}
-                    openItems={openItems}
-                    toggleAccordion={toggleAccordion}
-                    handleNavigate={handleNavigate}
-                    onMenuClick={handleMenuClick}
-                  />
+        {/* Main Wrapper Div */}
+        <div className="xperty-sidebar-main">
+          {/* Sidebar Content */}
+          <div className="xperty-sidebar-content">
+            {/* Business Selector */}
+            <BusinessSelector collapsed={collapsed} />
+
+            {/* Search */}
+            {/* <SidebarSearch collapsed={collapsed} /> */}
+
+            {/* Navigation */}
+            <div className={`xperty-sidebar-scroll ${collapsed ? "collapsed" : ""}`}>
+              <div className="xperty-sidebar-sections">
+                {navSections.map((section, sectionIndex) => (
+                  <div key={section.label} className="xperty-sidebar-section">
+                    {!collapsed && section.label !== "MAIN" && (
+                      <p className="xperty-section-label">{section.label}</p>
+                    )}
+                    <div className="xperty-nav-links">
+                      {section.items.map((item) => (
+                        <MenuItemWrapper
+                          key={item.title}
+                          item={item}
+                          location={location}
+                          collapsed={collapsed}
+                          openItems={openItems}
+                          toggleAccordion={toggleAccordion}
+                          handleNavigate={handleNavigate}
+                          onMenuClick={handleMenuClick}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
-          ))}
+
+            {/* Help Section at Bottom */}
+            <div className="xperty-developers-section">
+              {collapsed ? (
+                <Tooltip text="Help" collapsed={collapsed}>
+                  <Link
+                    to="#"
+                    className="xperty-nav-link developers collapsed"
+                    onClick={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      handleMenuClick("Help", rect);
+                    }}
+                  >
+                    <HelpCircle className="xperty-nav-icon" />
+                  </Link>
+                </Tooltip>
+              ) : (
+                <Link
+                  to="#"
+                  className="xperty-nav-link developers"
+                  onClick={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    handleMenuClick("Help", rect);
+                  }}
+                >
+                  <HelpCircle className="xperty-nav-icon" />
+                  <span className="xperty-nav-text">Help</span>
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Collapse Toggle Button - Right Edge */}
+          <div className="xperty-sidebar-toggle">
+            <ToggleButtonWithToast
+              collapsed={collapsed}
+              onToggleCollapse={onToggleCollapse}
+            />
+          </div>
         </div>
- 
-        {/* Help Section at Bottom */}
-        <div className="stripe-developers-section">
-          {collapsed ? (
-            <Tooltip text="Help" collapsed={collapsed}>
-              <Link
-                to="#"
-                className="stripe-nav-link developers collapsed"
-                onClick={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  handleMenuClick("Help", rect);
-                }}
-              >
-                <HelpCircle className="stripe-nav-icon" />
-              </Link>
-            </Tooltip>
-          ) : (
-            <Link
-              to="#"
-              className="stripe-nav-link developers"
-              onClick={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                handleMenuClick("Help", rect);
-              }}
-            >
-              <HelpCircle className="stripe-nav-icon" />
-              <span className="stripe-nav-text">Help</span>
-            </Link>
-          )}
-        </div>
-      </div>
- 
-      {/* Collapse Toggle Button */}
-      <div className="stripe-sidebar-toggle">
-        <button
-          className="stripe-toggle-btn"
-          onClick={onToggleCollapse}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {collapsed ? (
-            <PanelLeft className="stripe-toggle-icon" />
-          ) : (
-            <PanelLeftClose className="stripe-toggle-icon" />
-          )}
-        </button>
-      </div>
-    </aside>
+      </aside>
     </>
   );
 };

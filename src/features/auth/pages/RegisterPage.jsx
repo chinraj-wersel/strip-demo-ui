@@ -261,7 +261,7 @@ export const RegisterPage = () => {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="example@experty.com"
+                placeholder="example@Xperty.com"
                 value={formData.email}
                 onChange={handleChange}
                 disabled={isLoading}

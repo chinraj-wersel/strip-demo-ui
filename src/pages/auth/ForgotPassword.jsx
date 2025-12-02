@@ -112,7 +112,7 @@ export const ForgotPassword = () => {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="example@experty.com"
+                placeholder="example@Xperty.com"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);

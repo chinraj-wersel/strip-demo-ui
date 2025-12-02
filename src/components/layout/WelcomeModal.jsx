@@ -89,7 +89,7 @@ export const WelcomeModal = ({ isOpen, onClose }) => {
           <div className="welcome-content-wrapper">
             {step === 1 && (
               <>
-                <h1 className="welcome-title">Welcome to Stripe</h1>
+                <h1 className="welcome-title">Welcome to xperty</h1>
                 <p className="welcome-description">
                   Answer a few questions about your business to customize your setup. You can always change this later.
                 </p>
@@ -263,7 +263,7 @@ export const WelcomeModal = ({ isOpen, onClose }) => {
                 </div>
                 <div className="preview-checkout-box"></div>
               </div>
-              <div className="preview-stripe-logo">stripe</div>
+              <div className="preview-xperty-logo">xperty</div>
             </div>
           ) : (
             <div className="sandbox-preview-content">
