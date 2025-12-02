@@ -1,0 +1,807 @@
+/* ============================================
+   STRIPE SIDEBAR - EXACT MATCH
+   Width Expanded: 240px | Collapsed: 64px
+   Font: -apple-system stack | Size: 14px
+   ============================================ */
+
+/* Sidebar Container */
+.stripe-sidebar {
+  position: fixed;
+  left: 0;
+  top: 40px; /* Below 40px test banner */
+  height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-right: 1px solid #e3e8ee;
+  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 50;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+}
+
+.stripe-sidebar.expanded {
+  width: 240px;
+}
+
+.stripe-sidebar.collapsed {
+  width: 56px;
+  padding-top: 4px;
+}
+
+/* Collapsed sidebar - hide section separators */
+.stripe-sidebar.collapsed .stripe-section-label {
+  display: none;
+}
+
+/* Collapsed sidebar - center all items */
+.stripe-sidebar.collapsed .stripe-sidebar-section {
+  align-items: center;
+}
+
+.stripe-sidebar.collapsed .stripe-nav-links {
+  align-items: center;
+}
+
+/* ============================================
+   TOOLTIP STYLES - EXACT STRIPE MATCH
+   ============================================ */
+
+.tooltip-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.tooltip-content {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #0a2540;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease 0.2s, visibility 0.1s ease 0.2s;
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-content::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: #0a2540;
+}
+
+.tooltip-wrapper:hover .tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ============================================
+   BUSINESS SELECTOR - EXACT STRIPE MATCH
+   ============================================ */
+
+.business-selector {
+  padding: 12px;
+  border-bottom: 1px solid #e3e8ee;
+  position: relative;
+}
+
+.business-selector.collapsed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: none;
+}
+
+.business-avatar-btn {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.business-avatar-btn:hover {
+  background-color: #f6f8fa;
+}
+
+.business-selector-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.business-selector-btn:hover {
+  background-color: #f6f8fa;
+}
+
+/* Business Avatar - Purple gradient like Stripe */
+.business-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #635bff 0%, #0a2540 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.business-avatar span {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.business-avatar.small {
+  width: 24px;
+  height: 24px;
+}
+
+.business-avatar.small span {
+  font-size: 11px;
+}
+
+/* Business Name */
+.business-name {
+  flex: 1;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0a2540;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Chevron */
+.business-chevron {
+  width: 16px;
+  height: 16px;
+  color: #697386;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.business-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* Business Dropdown */
+.business-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 8px;
+  right: 8px;
+  background: #ffffff;
+  border: 1px solid #e3e8ee;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.business-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0a2540;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.business-dropdown-item:hover {
+  background-color: #f6f8fa;
+}
+
+.business-dropdown-item.active {
+  background-color: #f0f5ff;
+}
+
+.business-dropdown-item.add-new {
+  color: #635bff;
+  font-weight: 500;
+}
+
+.business-dropdown-divider {
+  height: 1px;
+  background-color: #e3e8ee;
+  margin: 4px 0;
+}
+
+/* ============================================
+   SEARCH BAR - EXACT STRIPE MATCH
+   ============================================ */
+
+.sidebar-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px;
+  padding: 7px 10px;
+  background-color: #f6f8fa;
+  border: 1px solid #e3e8ee;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sidebar-search:hover {
+  background-color: #ffffff;
+  border-color: #c1c9d2;
+}
+
+/* Collapsed Search Button */
+.sidebar-search.collapsed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 8px auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.sidebar-search.collapsed:hover {
+  background-color: #f6f8fa;
+}
+
+.sidebar-search.collapsed .sidebar-search-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.sidebar-search-icon {
+  width: 16px;
+  height: 16px;
+  color: #697386;
+  flex-shrink: 0;
+}
+
+.sidebar-search-placeholder {
+  font-size: 14px;
+  font-weight: 400;
+  color: #697386;
+}
+
+/* ============================================
+   SCROLL AREA
+   ============================================ */
+
+.stripe-sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+.stripe-sidebar-scroll.collapsed {
+  padding: 8px 0;
+}
+
+/* Custom Scrollbar - Stripe style */
+.stripe-sidebar-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.stripe-sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.stripe-sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #c1c9d2;
+  border-radius: 3px;
+}
+
+.stripe-sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #9ca5af;
+}
+
+/* ============================================
+   NAVIGATION STRUCTURE
+   ============================================ */
+
+.stripe-sidebar-sections {
+  display: flex;
+  flex-direction: column;
+}
+
+.stripe-sidebar-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section Label - EXACT 11px uppercase */
+.stripe-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #697386;
+  padding: 16px 16px 8px 16px;
+  margin: 0;
+}
+
+.stripe-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.stripe-item-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================
+   NAVIGATION LINK - EXACT STRIPE MATCH
+   Height: 36px | Font: 14px 500
+   ============================================ */
+
+.stripe-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 36px;
+  padding: 6px 16px;
+  text-decoration: none;
+  color: #3c4257;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  border-radius: 0;
+}
+
+.stripe-nav-link:hover {
+  background-color: #f6f8fa;
+  color: #0a2540;
+}
+
+/* Active State - Light blue background */
+.stripe-nav-link.active {
+  background-color: #f0f5ff;
+  color: #635bff;
+}
+
+.stripe-nav-link.active .stripe-nav-icon {
+  color: #635bff;
+}
+
+/* Collapsed State */
+.stripe-nav-link.collapsed {
+  justify-content: center;
+  padding: 8px;
+  margin: 2px auto;
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  border-radius: 6px;
+  gap: 0;
+}
+
+.stripe-nav-link.collapsed:hover {
+  background-color: #f6f8fa;
+}
+
+.stripe-nav-link.collapsed.active {
+  background-color: #f0f5ff;
+}
+
+.stripe-nav-link.collapsed.active .stripe-nav-icon {
+  color: #635bff;
+}
+
+/* Stripe exact active state - left border indicator */
+.stripe-nav-link.collapsed.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  background-color: #635bff;
+  border-radius: 0 2px 2px 0;
+}
+
+.stripe-nav-link.collapsed {
+  position: relative;
+}
+
+/* Nav Icon - 18px Stripe style */
+.stripe-nav-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  stroke-width: 1.75;
+  color: #697386;
+  transition: color 0.15s ease;
+}
+
+.stripe-nav-link:hover .stripe-nav-icon {
+  color: #0a2540;
+}
+
+.stripe-nav-link.collapsed .stripe-nav-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Nav Text */
+.stripe-nav-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Chevron for expandable items */
+.stripe-nav-chevron {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #697386;
+  transition: transform 0.2s ease;
+  margin-left: auto;
+}
+
+.stripe-nav-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   SUB LINKS - Nested items
+   ============================================ */
+
+.stripe-sublinks {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  padding: 2px 0;
+  border-left: 1px solid #e3e8ee;
+}
+
+.stripe-sublink {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 16px;
+  text-decoration: none;
+  color: #3c4257;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.15s ease;
+  border-radius: 0;
+}
+
+.stripe-sublink:hover {
+  background-color: #f6f8fa;
+  color: #0a2540;
+}
+
+.stripe-sublink.active {
+  background-color: #f0f5ff;
+  color: #635bff;
+  font-weight: 500;
+}
+
+.stripe-sublink-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================
+   DEVELOPERS SECTION - Bottom
+   ============================================ */
+
+.stripe-developers-section {
+  padding: 8px 0;
+  margin-top: auto;
+  border-top: 1px solid #e3e8ee;
+}
+
+.stripe-nav-link.developers {
+  color: #3c4257;
+}
+
+.stripe-nav-link.developers:hover {
+  background-color: #f6f8fa;
+  color: #0a2540;
+}
+
+.stripe-nav-link.developers.collapsed {
+  justify-content: center;
+  padding: 8px;
+  margin: 2px auto;
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  border-radius: 6px;
+  gap: 0;
+}
+
+.stripe-nav-link.developers.collapsed:hover {
+  background-color: #f6f8fa;
+}
+
+.stripe-sidebar.collapsed .stripe-developers-section {
+  padding: 4px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* ============================================
+   SIDEBAR TOGGLE BUTTON
+   ============================================ */
+
+.stripe-sidebar-toggle {
+  padding: 8px 12px;
+  border-top: 1px solid #e3e8ee;
+  display: flex;
+  justify-content: center;
+}
+
+.stripe-sidebar.collapsed .stripe-sidebar-toggle {
+  padding: 8px;
+}
+
+.stripe-toggle-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  color: #697386;
+}
+
+.stripe-toggle-btn:hover {
+  background-color: #f6f8fa;
+  color: #0a2540;
+}
+
+.stripe-toggle-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Focus States for Accessibility */
+.stripe-nav-link:focus-visible,
+.stripe-sublink:focus-visible,
+.business-selector-btn:focus-visible {
+  outline: 2px solid #635bff;
+  outline-offset: -2px;
+}
+
+/* ============================================
+   DARK MODE - Stripe Dark Theme
+   ============================================ */
+
+.dark .stripe-sidebar {
+  background-color: #0a2540;
+  border-right-color: #1a3a5c;
+}
+
+.dark .business-selector {
+  border-bottom-color: #1a3a5c;
+}
+
+.dark .business-selector-btn:hover {
+  background-color: #1a3a5c;
+}
+
+.dark .business-name {
+  color: #ffffff;
+}
+
+.dark .business-chevron {
+  color: #8898aa;
+}
+
+.dark .business-dropdown {
+  background-color: #0a2540;
+  border-color: #1a3a5c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .business-dropdown-item {
+  color: #ffffff;
+}
+
+.dark .business-dropdown-item:hover {
+  background-color: #1a3a5c;
+}
+
+.dark .business-dropdown-item.active {
+  background-color: #1a3a5c;
+}
+
+.dark .business-dropdown-item.add-new {
+  color: #7a73ff;
+}
+
+.dark .business-dropdown-divider {
+  background-color: #1a3a5c;
+}
+
+.dark .sidebar-search {
+  background-color: #1a3a5c;
+  border-color: #1a3a5c;
+}
+
+.dark .sidebar-search:hover {
+  background-color: #0a2540;
+  border-color: #3d5a80;
+}
+
+.dark .sidebar-search-icon {
+  color: #8898aa;
+}
+
+.dark .sidebar-search-placeholder {
+  color: #8898aa;
+}
+
+.dark .stripe-section-label {
+  color: #8898aa;
+}
+
+.dark .stripe-nav-link {
+  color: #c1c9d2;
+}
+
+.dark .stripe-nav-link:hover {
+  background-color: #1a3a5c;
+  color: #ffffff;
+}
+
+.dark .stripe-nav-link.active {
+  background-color: #1a3a5c;
+  color: #7a73ff;
+}
+
+.dark .stripe-nav-link.active .stripe-nav-icon {
+  color: #7a73ff;
+}
+
+.dark .stripe-nav-link.collapsed:hover {
+  background-color: #1a3a5c;
+}
+
+.dark .stripe-nav-link.collapsed.active {
+  background-color: #1a3a5c;
+}
+
+.dark .stripe-nav-icon {
+  color: #8898aa;
+}
+
+.dark .stripe-nav-link:hover .stripe-nav-icon {
+  color: #ffffff;
+}
+
+.dark .stripe-nav-chevron {
+  color: #8898aa;
+}
+
+.dark .stripe-sublinks {
+  border-left-color: #1a3a5c;
+}
+
+.dark .stripe-sublink {
+  color: #c1c9d2;
+}
+
+.dark .stripe-sublink:hover {
+  background-color: #1a3a5c;
+  color: #ffffff;
+}
+
+.dark .stripe-sublink.active {
+  background-color: #1a3a5c;
+  color: #7a73ff;
+}
+
+.dark .stripe-developers-section {
+  border-top-color: #1a3a5c;
+}
+
+.dark .stripe-sidebar-footer {
+  border-top-color: #1a3a5c;
+}
+
+.dark .stripe-toggle-btn {
+  color: #8898aa;
+}
+
+.dark .stripe-toggle-btn:hover {
+  background-color: #1a3a5c;
+  color: #ffffff;
+}
+
+.dark .stripe-sidebar-toggle {
+  border-top-color: #1a3a5c;
+}
+
+.dark .tooltip-content {
+  background-color: #ffffff;
+  color: #0a2540;
+}
+
+.dark .tooltip-content::before {
+  border-right-color: #ffffff;
+}
+
+.dark .business-avatar-btn:hover {
+  background-color: #1a3a5c;
+}
+
+.dark .sidebar-search.collapsed:hover {
+  background-color: #1a3a5c;
+}
+
+.dark .stripe-sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #3d5a80;
+}
+
+.dark .stripe-sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #4d6a90;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .stripe-sidebar {
+    position: relative;
+    width: 100% !important;
+    max-width: 280px;
+    height: 100%;
+    top: 0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+}

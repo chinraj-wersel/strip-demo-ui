@@ -1,0 +1,937 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ============================================
+       EXACT STRIPE COLOR SYSTEM
+       Extracted from Stripe Dashboard HTML
+       ============================================ */
+
+    /* Core Colors */
+    --stripe-primary: #635bff;
+    --stripe-primary-hover: #5851ea;
+    --stripe-primary-light: #7a73ff;
+
+    /* Text Colors */
+    --stripe-dark: #0a2540;
+    --stripe-text: #3c4257;
+    --stripe-muted: #697386;
+    --stripe-light-text: #8898aa;
+
+    /* Background Colors */
+    --stripe-bg: #ffffff;
+    --stripe-bg-hover: #f0f5ff;
+    --stripe-white: #ffffff;
+
+    /* Border Colors */
+    --stripe-border: #e3e8ee;
+    --stripe-border-light: #ebeef1;
+    --stripe-border-focus: #c1c9d2;
+
+    /* Status Colors */
+    --stripe-orange: #ff5722;
+    --stripe-green: #30b130;
+    --stripe-red: #df1b41;
+    --stripe-yellow: #ffc107;
+
+    /* Shadows */
+    --stripe-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --stripe-shadow: 0 2px 5px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.1);
+    --stripe-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.1);
+
+    /* Tailwind CSS Variables */
+    --background: 0 0% 100%;
+    --foreground: 213 31% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 213 31% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 31% 15%;
+    --primary: 243 75% 59%;
+    --primary-foreground: 0 0% 100%;
+    --ring: 243 75% 59%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 213 31% 15%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 213 31% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --radius: 0.375rem;
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    /* Dark mode Stripe colors */
+    --stripe-primary: #7a73ff;
+    --stripe-primary-hover: #8b85ff;
+
+    --stripe-dark: #ffffff;
+    --stripe-text: #c1c9d2;
+    --stripe-muted: #8898aa;
+    --stripe-light-text: #6b7c93;
+
+    --stripe-bg: #0a2540;
+    --stripe-bg-hover: #1a3a5c;
+    --stripe-white: #0a2540;
+
+    --stripe-border: #1a3a5c;
+    --stripe-border-light: #2d4a6a;
+    --stripe-border-focus: #3d5a80;
+
+    /* Tailwind Dark Variables */
+    --background: 213 37% 14%;
+    --foreground: 210 40% 98%;
+    --card: 213 37% 17%;
+    --card-foreground: 210 40% 98%;
+    --popover: 213 37% 17%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 243 70% 65%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 213 33% 20%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 213 33% 20%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 213 33% 20%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 50%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 213 33% 28%;
+    --input: 213 33% 28%;
+    --ring: 243 70% 65%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    /* EXACT Stripe font stack */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--stripe-text);
+    background-color: var(--stripe-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    @apply no-underline;
+    color: inherit;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    @apply no-underline;
+  }
+}
+
+/* ============================================
+   STRIPE LAYOUT STRUCTURE
+   ============================================ */
+
+.stripe-layout {
+  min-height: 100vh;
+  background-color: var(--stripe-bg);
+}
+
+.dark .stripe-layout {
+  background-color: #0a2540;
+}
+
+/* Main Container */
+.stripe-main-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  padding-top: 96px;
+  /* 40px banner + 56px header */
+  transition: padding-left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stripe-main-container.sidebar-expanded {
+  padding-left: 240px;
+}
+
+.stripe-main-container.sidebar-collapsed {
+  padding-left: 56px;
+}
+
+@media (max-width: 1024px) {
+  .stripe-main-container {
+    padding-left: 0 !important;
+  }
+}
+
+/* Main Content Area */
+.stripe-main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 10px;
+  background-color: var(--stripe-bg);
+}
+
+.stripe-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ============================================
+   STRIPE TEST MODE BANNER - EXACT MATCH
+   Height: 40px | Background: #ff5722
+   ============================================ */
+
+.stripe-test-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: #ff5722;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  z-index: 60;
+  padding: 0 32px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+}
+
+.test-mode-label {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.test-mode-message {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.test-mode-link {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-left: auto;
+  gap: 4px;
+}
+
+.test-mode-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .test-mode-message {
+    display: none;
+  }
+}
+
+/* ============================================
+   STRIPE HEADER - EXACT MATCH
+   Height: 56px | Background: #ffffff
+   ============================================ */
+
+.stripe-header {
+  position: fixed;
+  top: 40px;
+  /* Below 40px test banner */
+  right: 0;
+  height: 56px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e3e8ee;
+  z-index: 50;
+  transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stripe-header.sidebar-expanded {
+  left: 240px;
+}
+
+.stripe-header.sidebar-collapsed {
+  left: 56px;
+}
+
+@media (max-width: 1024px) {
+  .stripe-header {
+    left: 0 !important;
+  }
+}
+
+.dark .stripe-header {
+  background-color: #0a2540;
+  border-bottom-color: #1a3a5c;
+}
+
+.stripe-header-inner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 32px;
+  gap: 16px;
+}
+
+/* Header Left Section */
+.stripe-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stripe-mobile-menu-btn {
+  display: none;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: #697386;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.stripe-mobile-menu-btn:hover {
+  background-color: #f6f8fa;
+  color: #0a2540;
+}
+
+.dark .stripe-mobile-menu-btn {
+  color: #8898aa;
+}
+
+.dark .stripe-mobile-menu-btn:hover {
+  background-color: #1a3a5c;
+  color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+  .stripe-mobile-menu-btn {
+    display: flex;
+  }
+}
+
+/* Header Search - EXACT Stripe Search Bar */
+.stripe-header-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  background-color: #f6f8fa;
+  border: 1px solid #e3e8ee;
+  border-radius: 6px;
+  min-width: 220px;
+  transition: all 0.15s ease;
+}
+
+.stripe-header-search:focus-within {
+  background-color: #ffffff;
+  border-color: #635bff;
+  box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.15);
+}
+
+.dark .stripe-header-search {
+  background-color: #1a3a5c;
+  border-color: #1a3a5c;
+}
+
+.dark .stripe-header-search:focus-within {
+  background-color: #0a2540;
+  border-color: #7a73ff;
+  box-shadow: 0 0 0 3px rgba(122, 115, 255, 0.15);
+}
+
+.stripe-search-icon {
+  width: 16px;
+  height: 16px;
+  color: #697386;
+  flex-shrink: 0;
+}
+
+.dark .stripe-search-icon {
+  color: #8898aa;
+}
+
+.stripe-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0a2540;
+  font-family: inherit;
+}
+
+.stripe-search-input::placeholder {
+  color: #697386;
+}
+
+.dark .stripe-search-input {
+  color: #ffffff;
+}
+
+.dark .stripe-search-input::placeholder {
+  color: #8898aa;
+}
+
+@media (max-width: 640px) {
+  .stripe-header-search {
+    display: none;
+  }
+}
+
+/* Header Center - Sandbox Message */
+.stripe-header-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+
+.sandbox-message {
+  font-size: 14px;
+  font-weight: 400;
+  color: #697386;
+}
+
+.sandbox-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #635bff;
+  text-decoration: none;
+}
+
+.sandbox-link:hover {
+  text-decoration: underline;
+}
+
+.dark .sandbox-message {
+  color: #8898aa;
+}
+
+.dark .sandbox-link {
+  color: #7a73ff;
+}
+
+@media (max-width: 900px) {
+  .stripe-header-center {
+    display: none;
+  }
+}
+
+/* Header Right Section */
+.stripe-header-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Test Mode Toggle - EXACT Stripe Toggle */
+.test-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-right: 1px solid #e3e8ee;
+  margin-right: 8px;
+}
+
+.dark .test-mode-toggle {
+  border-right-color: #1a3a5c;
+}
+
+.test-mode-toggle-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #0a2540;
+}
+
+.dark .test-mode-toggle-label {
+  color: #ffffff;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background-color: #c1c9d2;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  padding: 0;
+}
+
+.toggle-switch.active {
+  background-color: #ff5722;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.active .toggle-slider {
+  transform: translateX(16px);
+}
+
+@media (max-width: 768px) {
+  .test-mode-toggle {
+    display: none;
+  }
+}
+
+/* Header Icon Buttons - EXACT Stripe Style */
+.stripe-header-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: #697386;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.stripe-header-icon-btn:hover {
+  background-color: #f6f8fa;
+  color: #0a2540;
+}
+
+.dark .stripe-header-icon-btn {
+  color: #8898aa;
+}
+
+.dark .stripe-header-icon-btn:hover {
+  background-color: #1a3a5c;
+  color: #ffffff;
+}
+
+/* Add Button - Purple Circle */
+.stripe-add-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #635bff;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-left: 4px;
+}
+
+.stripe-add-btn:hover {
+  background-color: #5851ea;
+}
+
+/* Setup Guide Button */
+.stripe-setup-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid #e3e8ee;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0a2540;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-left: 8px;
+}
+
+.stripe-setup-btn:hover {
+  background-color: #f6f8fa;
+  border-color: #c1c9d2;
+}
+
+.dark .stripe-setup-btn {
+  border-color: #1a3a5c;
+  color: #ffffff;
+}
+
+.dark .stripe-setup-btn:hover {
+  background-color: #1a3a5c;
+}
+
+/* Progress Ring */
+.setup-progress {
+  width: 18px;
+  height: 18px;
+}
+
+.progress-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  stroke: #e3e8ee;
+}
+
+.progress-ring-fill {
+  stroke: #635bff;
+  stroke-linecap: round;
+}
+
+.dark .progress-ring-bg {
+  stroke: #1a3a5c;
+}
+
+.dark .progress-ring-fill {
+  stroke: #7a73ff;
+}
+
+@media (max-width: 640px) {
+  .stripe-setup-btn span {
+    display: none;
+  }
+
+  .stripe-setup-btn {
+    padding: 5px 8px;
+  }
+}
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+@layer components {
+
+  /* Button system - Stripe style */
+  .btn-base {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0;
+    border-radius: 6px;
+  }
+
+  .btn-variant-default {
+    background-color: #635bff;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn-variant-default:hover {
+    background-color: #5851ea;
+  }
+
+  .btn-variant-destructive {
+    @apply bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90;
+  }
+
+  .btn-variant-outline {
+    background-color: #ffffff;
+    border: 1px solid #e3e8ee;
+    color: #0a2540;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .btn-variant-outline:hover {
+    background-color: #f6f8fa;
+    border-color: #c1c9d2;
+  }
+
+  .btn-variant-secondary {
+    background-color: #f6f8fa;
+    color: #0a2540;
+  }
+
+  .btn-variant-secondary:hover {
+    background-color: #ebeef1;
+  }
+
+  .btn-variant-ghost {
+    background: transparent;
+    color: #0a2540;
+  }
+
+  .btn-variant-ghost:hover {
+    background-color: #f6f8fa;
+  }
+
+  .btn-variant-link {
+    color: #635bff;
+    text-decoration: none;
+  }
+
+  .btn-variant-link:hover {
+    text-decoration: underline;
+  }
+
+  .btn-size-default {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  .btn-size-sm {
+    height: 28px;
+    padding: 0 12px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+
+  .btn-size-lg {
+    height: 44px;
+    padding: 0 24px;
+    font-size: 16px;
+  }
+
+  .btn-size-icon {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+
+  /* Input system - Stripe style */
+  .input-base {
+    display: flex;
+    height: 36px;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #e3e8ee;
+    background-color: #ffffff;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #0a2540;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.15s ease;
+  }
+
+  .input-base::placeholder {
+    color: #697386;
+  }
+
+  .input-base:focus {
+    outline: none;
+    border-color: #635bff;
+    box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.15);
+  }
+
+  .input-base:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Card primitives - Stripe style */
+  .card-base {
+    background-color: #ffffff;
+    border: 1px solid #e3e8ee;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .card-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #ebeef1;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0a2540;
+    line-height: 1.5;
+  }
+
+  .card-description {
+    font-size: 14px;
+    color: #697386;
+    margin-top: 4px;
+  }
+
+  .card-content {
+    padding: 20px 24px;
+  }
+
+  .card-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #ebeef1;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Auth layout */
+  .auth-page {
+    @apply min-h-screen flex flex-col lg:flex-row;
+    background-color: #f6f8fa;
+  }
+
+  .auth-hero {
+    @apply hidden lg:flex lg:w-1/2 relative overflow-hidden;
+    background: linear-gradient(135deg, #635bff 0%, #0a2540 100%);
+  }
+
+  .auth-panel {
+    @apply flex-1 flex items-center justify-center p-4 lg:p-8 min-h-[calc(100vh-12rem)] lg:min-h-screen;
+    background-color: #ffffff;
+  }
+
+  .auth-panel-inner {
+    @apply w-full max-w-md py-8 lg:py-0;
+  }
+
+  .auth-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0a2540;
+    margin-bottom: 8px;
+  }
+
+  .auth-subtitle {
+    font-size: 16px;
+    color: #697386;
+    margin-bottom: 32px;
+  }
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .auth-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0a2540;
+  }
+
+  .auth-submit-button {
+    height: 44px;
+    background-color: #635bff;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    width: 100%;
+  }
+
+  .auth-submit-button:hover {
+    background-color: #5851ea;
+  }
+
+  .auth-link {
+    color: #635bff;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .auth-link:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Dark mode overrides for cards */
+.dark .card-base {
+  background-color: #0a2540;
+  border-color: #1a3a5c;
+}
+
+.dark .card-header {
+  border-bottom-color: #1a3a5c;
+}
+
+.dark .card-title {
+  color: #ffffff;
+}
+
+.dark .card-description {
+  color: #8898aa;
+}
+
+.dark .card-footer {
+  border-top-color: #1a3a5c;
+}
+
+.dark .input-base {
+  background-color: #1a3a5c;
+  border-color: #1a3a5c;
+  color: #ffffff;
+}
+
+.dark .input-base::placeholder {
+  color: #8898aa;
+}
+
+.dark .input-base:focus {
+  border-color: #7a73ff;
+  box-shadow: 0 0 0 3px rgba(122, 115, 255, 0.15);
+}
+
+.dark .btn-variant-outline {
+  background-color: #0a2540;
+  border-color: #1a3a5c;
+  color: #ffffff;
+}
+
+.dark .btn-variant-outline:hover {
+  background-color: #1a3a5c;
+}
+
+.dark .auth-panel {
+  background-color: #0a2540;
+}
+
+.dark .auth-title {
+  color: #ffffff;
+}
+
+.dark .auth-subtitle {
+  color: #8898aa;
+}
+
+.dark .auth-label {
+  color: #ffffff;
+}
