@@ -62,11 +62,11 @@ function AssetCard({ asset, mode, onClick }) {
     if (mode === "grid") {
         return (
             <div
-                className="group relative bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+                className="group relative bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-xl hover:border-[#635bff] transition-all duration-300 cursor-pointer"
                 onClick={onClick}
             >
                 <div className="aspect-square bg-slate-50 relative overflow-hidden flex items-center justify-center group-hover:bg-slate-100 transition-colors">
-                    <Package className="h-10 w-10 text-slate-400 group-hover:text-indigo-500 transition-colors" />
+                    <Package className="h-10 w-10 text-slate-400 group-hover:text-[#635bff] transition-colors" />
                     <div className="absolute top-3 right-3">
                         <Badge variant="secondary" className={cn("font-medium shadow-sm backdrop-blur-sm bg-white/90", getStatusColor(status))}>
                             {status}
@@ -74,7 +74,7 @@ function AssetCard({ asset, mode, onClick }) {
                     </div>
                 </div>
                 <div className="p-4">
-                    <h3 className="font-semibold text-slate-900 truncate group-hover:text-indigo-600 transition-colors" title={name}>{name}</h3>
+                    <h3 className="font-semibold text-slate-900 truncate group-hover:text-[#635bff] transition-colors" title={name}>{name}</h3>
                     <p className="text-sm text-slate-500 truncate mt-1">{make}</p>
                 </div>
             </div>
@@ -84,17 +84,17 @@ function AssetCard({ asset, mode, onClick }) {
     // Card View (Minimal & Premium)
     return (
         <div
-            className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col"
+            className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-xl hover:border-[#635bff] transition-all duration-300 cursor-pointer flex flex-col"
             onClick={onClick}
         >
             <div className="p-6 flex-1">
                 <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center gap-4">
-                        <div className="h-12 w-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 group-hover:scale-110 transition-transform duration-300">
+                        <div className="h-12 w-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 group-hover:scale-110 group-hover:bg-[#635bff]/10 group-hover:text-[#635bff] transition-all duration-300">
                             <Package className="h-6 w-6" />
                         </div>
                         <div>
-                            <h3 className="font-semibold text-slate-900 text-lg group-hover:text-indigo-600 transition-colors">{name}</h3>
+                            <h3 className="font-semibold text-slate-900 text-lg group-hover:text-[#635bff] transition-colors">{name}</h3>
                             <p className="text-sm text-slate-500 font-medium">{make}</p>
                         </div>
                     </div>
@@ -112,7 +112,7 @@ function AssetCard({ asset, mode, onClick }) {
                         </div>
                     </div>
 
-                    <Button variant="ghost" size="sm" className="text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 font-medium group-hover:translate-x-1 transition-transform">
+                    <Button variant="ghost" size="sm" className="text-[#635bff] hover:text-[#635bff] hover:bg-[#635bff]/10 font-medium group-hover:translate-x-1 transition-transform">
                         View Details
                     </Button>
                 </div>
