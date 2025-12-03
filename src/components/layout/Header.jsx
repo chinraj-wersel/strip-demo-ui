@@ -103,10 +103,10 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
   }, [showNotifications]);
 
   const addMenuItems = [
-    { icon: FileText, label: 'Invoice', shortcut: 'c i', link: '/invoices/new' },
-    { icon: RefreshCw, label: 'Subscription', shortcut: 'c s', link: '/subscriptions/new' },
-    { icon: Link2, label: 'Payment link', shortcut: 'c l', link: '/payment-links/new' },
-    { icon: CreditCard, label: 'Payment', shortcut: 'c p', link: '/payments/new' },
+    { icon: FileText, label: 'Invoice', shortcut: 'c i' },
+    { icon: RefreshCw, label: 'Subscription', shortcut: 'c s' },
+    { icon: Link2, label: 'Payment link', shortcut: 'c l' },
+    { icon: CreditCard, label: 'Payment', shortcut: 'c p' },
   ];
 
   return (
@@ -265,16 +265,15 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
               {showAddMenu && (
                 <div className="xperty-add-menu">
                   {addMenuItems.map((item, index) => (
-                    <Link
+                    <div
                       key={index}
-                      to={item.link}
                       className="xperty-add-menu-item"
                       onClick={() => setShowAddMenu(false)}
                     >
                       <item.icon className="xperty-add-menu-icon" />
                       <span className="xperty-add-menu-label">{item.label}</span>
                       <span className="xperty-add-menu-shortcut">{item.shortcut}</span>
-                    </Link>
+                    </div>
                   ))}
                 </div>
               )}

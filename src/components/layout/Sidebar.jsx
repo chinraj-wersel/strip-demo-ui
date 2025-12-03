@@ -49,13 +49,13 @@ const NAVIGATION = [
         icon: Building2,
         href: ROUTES.PROPERTIES,
         children: [
-          { title: "All Properties", href: "/properties/all" },
-          { title: "Units", href: "/properties/units" },
-          { title: "Property Groups", href: "/properties/groups" },
-          { title: "Property Types", href: "/properties/types" },
-          { title: "Amenities", href: "/properties/amenities" },
-          { title: "Property Documents", href: "/properties/documents" },
-          { title: "Property Settings", href: "/properties/settings" },
+          { title: "All Properties" },
+          { title: "Units" },
+          { title: "Property Groups" },
+          { title: "Property Types" },
+          { title: "Amenities" },
+          { title: "Property Documents" },
+          { title: "Property Settings" },
         ],
       },
       {
@@ -525,22 +525,12 @@ const MenuItemWrapper = ({ item, location, collapsed, openItems, toggleAccordion
           onMouseLeave={() => setIsHovered(false)}
         >
           {item.children.map((child) => (
-            <Link
+            <div
               key={child.title}
-              to={child.href}
-              onClick={(e) => {
-                if (onMenuClick && wrapperRef.current) {
-                  const rect = wrapperRef.current.getBoundingClientRect();
-                  onMenuClick(child.title, rect);
-                }
-                if (handleNavigate) {
-                  handleNavigate();
-                }
-              }}
-              className={`xperty-dropdown-item ${location.pathname === child.href ? 'active' : ''}`}
+              className="xperty-dropdown-item"
             >
               {child.title}
-            </Link>
+            </div>
           ))}
         </div>
       )}
