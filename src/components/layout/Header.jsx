@@ -151,6 +151,7 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
                   setShowNotifications(!showNotifications);
                   if (!showNotifications) {
                     setShowAssistant(false);
+                    setShowSetupGuide(false);
                   }
                 }}
               >
@@ -235,7 +236,13 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
             {/* Setup Guide Button with Progress Ring */}
             <button
               className={cn("xperty-setup-btn", showSetupGuide && "active")}
-              onClick={() => setShowSetupGuide(!showSetupGuide)}
+              onClick={() => {
+                setShowSetupGuide(!showSetupGuide);
+                if (!showSetupGuide) {
+                  setShowNotifications(false);
+                  setShowAssistant(false);
+                }
+              }}
             >
               <span className="hidden md:inline">Setup guide</span>
               <div className="setup-progress">
