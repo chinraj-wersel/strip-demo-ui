@@ -157,6 +157,10 @@
   background-color: #f6f8fa;
 }
 
+.business-selector-btn.active {
+  background-color: #f6f8fa;
+}
+
 /* Business Avatar - Purple gradient like xperty */
 .business-avatar {
   width: 28px;
@@ -263,6 +267,7 @@
   align-items: center;
   padding: 20px 16px 16px;
   gap: 8px;
+  padding-top:8px;
 }
 
 .business-dropdown-avatar {

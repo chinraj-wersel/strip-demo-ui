@@ -66,22 +66,22 @@ const NAVIGATION = [
       {
         title: "Tenants",
         icon: Users,
-        href: ROUTES.USERS || "/users",
+        href: "/Tentants",
       },
       {
         title: "Maintenance",
         icon: Wrench,
-        href: "/maintenance",
+        href: "/Maintenance",
       },
       {
         title: "Files",
         icon: Folder,
-        href: "/files",
+        href: "/Files",
       },
       {
         title: "Communication",
         icon: MessageSquare,
-        href: "/communication",
+        href: "/Communication",
       },
     ],
   },
@@ -174,26 +174,58 @@ const InlineToast = ({ message, position, onClose }) => {
   );
 };
  
-// Toggle Button with Toast Component
-const ToggleButtonWithToast = ({ collapsed, onToggleCollapse }) => {
-  const { toast } = useToast();
+// Toggle Button with Tooltip Component
+const ToggleButtonWithTooltip = ({ collapsed, onToggleCollapse }) => {
+  const [tooltipPosition, setTooltipPosition] = useState(null);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const buttonRef = useRef(null);
 
   const handleMouseEnter = () => {
-    toast({
-      title: collapsed ? "Expand sidebar" : "Collapse sidebar",
-      // description: collapsed ? "Click to expand the sidebar" : "Click to collapse the sidebar",
-    });
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setTooltipPosition({
+        left: rect.right + 12,
+        top: rect.top + rect.height / 2,
+      });
+      setShowTooltip(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setShowTooltip(false);
   };
 
   return (
-    <button
-      className={`xperty-toggle-btn ${collapsed ? "collapsed" : ""}`}
-      onClick={onToggleCollapse}
-      onMouseEnter={handleMouseEnter}
-      aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-    >
-      <ChevronsLeft className="xperty-toggle-icon" />
-    </button>
+    <>
+      <button
+        ref={buttonRef}
+        className={`xperty-toggle-btn ${collapsed ? "collapsed" : ""}`}
+        onClick={onToggleCollapse}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+      >
+        <ChevronsLeft className="xperty-toggle-icon" />
+      </button>
+      {showTooltip && tooltipPosition && (
+        <div
+          className="tooltip-content"
+          style={{
+            position: 'fixed',
+            // left: `${tooltipPosition.left}px`,
+            // top: `${tooltipPosition.top}px`,
+            left: '40px',
+            top: '12px',
+            transform: 'translateY(-50%)',
+            zIndex: 10000,
+            opacity: 1,
+            visibility: 'visible',
+          }}
+        >
+          {collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        </div>
+      )}
+    </>
   );
 };
 
@@ -255,7 +287,7 @@ const BusinessSelector = ({ collapsed }) => {
     <div className="business-selector" ref={dropdownRef}>
       <button
         ref={buttonRef}
-        className="business-selector-btn"
+        className={`business-selector-btn ${isOpen ? 'active' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="business-avatar">
@@ -678,7 +710,7 @@ export const Sidebar = ({
 
           {/* Collapse Toggle Button - Right Edge */}
           <div className="xperty-sidebar-toggle">
-            <ToggleButtonWithToast
+            <ToggleButtonWithTooltip
               collapsed={collapsed}
               onToggleCollapse={onToggleCollapse}
             />

@@ -24,6 +24,10 @@ import { ComplianceOverview } from "../features/property/components/ComplianceOv
 import { AlertsCenter } from "../features/property/components/AlertsCenter.jsx";
 import { SystemConsole } from "../features/property/components/SystemConsole.jsx";
 import { SettingsPage } from "../pages/SettingsPage.jsx";
+import { TenantsPage } from "../pages/TenantsPage.jsx";
+import { MaintenancePage } from "../pages/MaintenancePage.jsx";
+import { FilesPage } from "../pages/FilesPage.jsx";
+import { CommunicationPage } from "../pages/CommunicationPage.jsx";
 
 export const router = createBrowserRouter([
   // Root redirect to signin
@@ -220,6 +224,46 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <SettingsPage />,
+      },
+    ],
+  },
+  {
+    path: "/Tentants",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <TenantsPage />,
+      },
+    ],
+  },
+  {
+    path: "/Maintenance",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <MaintenancePage />,
+      },
+    ],
+  },
+  {
+    path: "/Files",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <FilesPage />,
+      },
+    ],
+  },
+  {
+    path: "/Communication",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <CommunicationPage />,
       },
     ],
   },

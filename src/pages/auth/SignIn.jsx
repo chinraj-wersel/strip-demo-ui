@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, SprayCanIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -205,7 +205,13 @@ export const SignIn = () => {
         {/* Card */}
         <div className="w-full max-w-[550px] bg-white rounded-lg shadow-[0_15px_35px_rgba(50,50,93,0.1),0_5px_15px_rgba(0,0,0,0.07)] ">
           <div className="p-8 sm:p-12">
-          <h2 className="text-2xl font-semibold text-[#1a1f36] mb-6">Sign in to your account</h2>
+          <h2 className="mb-6" style={{ 
+            fontSize: '26px', 
+            fontWeight: 600, 
+            color: '#3c4257', 
+            height: '36px',
+            fontFamily: 'sohne-var, sohne-woff, "Helvetica Neue", Arial, sans-serif'
+          }}>Sign in to your account</h2>
 
           {/* General Error Message */}
           {errors.general && (
@@ -217,7 +223,15 @@ export const SignIn = () => {
           <form onSubmit={handleSignIn} className="space-y-5">
             {/* Email */}
             <div className="space-y-1.5">
-              <Label htmlFor="email" className="text-sm font-medium text-[#3c4257]">Email</Label>
+              <Label 
+                htmlFor="email" 
+                className="text-[#3c4257]"
+                style={{
+                  fontSize: '14px',
+                  fontFamily: 'sohne-var, sohne-woff, "Helvetica Neue", Arial, sans-serif',
+                  fontWeight: 400
+                }}
+              >Email</Label>
               <Input
                 id="email"
                 name="email"
@@ -236,8 +250,25 @@ export const SignIn = () => {
             {/* Password */}
             <div className="space-y-1.5">
               <div className="flex justify-between items-center">
-                <Label htmlFor="password" className="text-sm font-medium text-[#3c4257]">Password</Label>
-                <Link to={ROUTES.FORGOT_PASSWORD} className="text-sm text-[#635bff] hover:text-[#0a2540] transition-colors">Forgot your password?</Link>
+                <Label 
+                  htmlFor="password" 
+                  className="text-[#3c4257]"
+                  style={{
+                    fontSize: '14px',
+                    fontFamily: 'sohne-var, sohne-woff, "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: 400
+                  }}
+                >Password</Label>
+                <span 
+                  onClick={() => navigate(ROUTES.FORGOT_PASSWORD)}
+                  className="cursor-pointer hover:text-[#3c4257] transition-colors" 
+                  style={{
+                    fontSize: '14px',
+                    fontFamily: 'sohne-var, sohne-woff, "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: 400,
+                    color: '#635bff'
+                  }}
+                >Forgot your password?</span>
               </div>
               <div className="relative">
                 <Input
@@ -250,18 +281,20 @@ export const SignIn = () => {
                   className={`h-10 border-[#e3e8ee] focus:border-[#635bff] focus:ring-1 focus:ring-[#635bff] transition-all shadow-sm pr-10 ${errors.password ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
                     }`}
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  disabled={isLoading}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground transition hover:text-primary focus:outline-none disabled:opacity-50"
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </button>
+                {formData.password && (
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    disabled={isLoading}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground transition hover:text-primary focus:outline-none disabled:opacity-50"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
+                )}
               </div>
               {errors.password && (
                 <p className="text-sm text-red-600 mt-1">{errors.password}</p>
@@ -277,8 +310,8 @@ export const SignIn = () => {
             {/* Submit Button */}
             <Button
               type="submit"
-              disabled={isLoading}
-              className="w-full h-10 bg-[#635bff] text-white font-medium transition-all shadow-sm"
+              disabled={isLoading || !formData.email || !formData.password}
+              className="w-full h-10 bg-[#635bff] text-white font-medium transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
