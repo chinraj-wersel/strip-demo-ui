@@ -170,7 +170,7 @@ export const AssetsRegistry = () => {
         showSearch={false}
       />
 
-      <div className="max-w-[1600px] mx-auto mt-4 px-8">
+      <div className="mt-2 px-12">
         {/* Toolbar */}
         <AssetToolbar
           viewMode={viewMode}

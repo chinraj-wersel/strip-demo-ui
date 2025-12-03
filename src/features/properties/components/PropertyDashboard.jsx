@@ -111,7 +111,7 @@ export function PropertyDashboard() {
                 showSearch={false}
             />
 
-            <div className="max-w-[1600px] mx-auto mt-4 px-8">
+            <div className="mt-2 px-12">
                 <PropertyToolbar
                     viewMode={viewMode}
                     onViewModeChange={setViewMode}

@@ -5,7 +5,8 @@ import {
     Grid,
     Filter,
     ArrowUpDown,
-    Plus
+    Plus,
+    Search
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -17,6 +18,7 @@ import {
     DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 
 export function AssetToolbar({
     viewMode,
@@ -25,19 +27,21 @@ export function AssetToolbar({
     activeFiltersCount,
     sortConfig,
     onSortChange,
+    searchQuery,
+    onSearchChange,
 }) {
     return (
         <div className="flex flex-col gap-4 mb-6">
-            <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 {/* Left: Filters */}
-                <div className="flex items-center gap-3 flex-1 min-w-[300px]">
+                <div className="flex items-center gap-3 w-full sm:w-auto flex-1">
                     <Button
                         variant="outline"
-                        className="gap-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                        className="gap-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shrink-0"
                         onClick={onFilterClick}
                     >
                         <Filter className="h-4 w-4" />
-                        Filters
+                        <span className="hidden sm:inline">Filters</span>
                         {activeFiltersCount > 0 && (
                             <Badge variant="secondary" className="ml-1 h-5 px-1.5 bg-slate-100 text-slate-700">
                                 {activeFiltersCount}
@@ -47,12 +51,12 @@ export function AssetToolbar({
                 </div>
 
                 {/* Right: Sort, View Toggle, Add Button */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-end">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline" className="gap-2 border-slate-200 text-slate-700">
+                            <Button variant="outline" className="gap-2 border-slate-200 text-slate-700 px-3 sm:px-4">
                                 <ArrowUpDown className="h-4 w-4" />
-                                Sort
+                                <span className="hidden sm:inline">Sort</span>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-[180px]">
@@ -76,13 +80,13 @@ export function AssetToolbar({
                         </DropdownMenuContent>
                     </DropdownMenu>
 
-                    <div className="h-8 w-[1px] bg-slate-200 mx-1" />
+                    <div className="hidden sm:block h-8 w-[1px] bg-slate-200 mx-1" />
 
                     <ToggleGroup
                         type="single"
                         value={viewMode}
                         onValueChange={(val) => val && onViewModeChange(val)}
-                        className="border border-slate-200 rounded-md p-1 bg-slate-50 gap-1"
+                        className="hidden sm:flex border border-slate-200 rounded-md p-1 bg-slate-50 gap-1"
                     >
                         <ToggleGroupItem value="card" aria-label="Card view" className="h-8 w-8 p-0 data-[state=on]:bg-white data-[state=on]:shadow-sm">
                             <LayoutGrid className="h-4 w-4" />
@@ -95,9 +99,10 @@ export function AssetToolbar({
                         </ToggleGroupItem>
                     </ToggleGroup>
 
-                    <Button className="ml-2 bg-[#635bff] hover:bg-[#5851ea] text-white gap-2 shadow-sm">
+                    <Button className="ml-2 bg-[#635bff] hover:bg-[#5851ea] text-white gap-2 shadow-sm px-3 sm:px-4">
                         <Plus className="h-4 w-4" />
-                        Add Asset
+                        <span className="hidden sm:inline">Add Asset</span>
+                        <span className="sm:hidden">Add</span>
                     </Button>
                 </div>
             </div>

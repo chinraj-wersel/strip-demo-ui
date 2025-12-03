@@ -23,21 +23,18 @@ export function PropertyFilters({
     onFilterChange,
     onClearFilters
 }) {
+    const hasActiveFilters =
+        filters.status?.length > 0 ||
+        filters.type?.length > 0 ||
+        filters.location?.length > 0 ||
+        filters.rentRange?.[0] > 0 ||
+        filters.rentRange?.[1] < 10000;
+
     return (
         <Sheet open={open} onOpenChange={onOpenChange}>
             <SheetContent className="w-[400px] sm:w-[540px] overflow-y-auto">
                 <SheetHeader className="pb-6 border-b border-slate-100">
-                    <div className="flex items-center justify-between">
-                        <SheetTitle className="text-xl font-semibold text-slate-900">Filters</SheetTitle>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-slate-500 hover:text-slate-900"
-                            onClick={onClearFilters}
-                        >
-                            Clear all
-                        </Button>
-                    </div>
+                    <SheetTitle className="text-xl font-semibold text-slate-900">Filters</SheetTitle>
                     <SheetDescription>
                         Refine your property list by status, type, rent range, and more.
                     </SheetDescription>
@@ -146,13 +143,23 @@ export function PropertyFilters({
                     </div>
                 </div>
 
-                <SheetFooter className="pt-6 border-t border-slate-100">
-                    <SheetClose asChild>
-                        <Button variant="outline" className="mr-2">Cancel</Button>
-                    </SheetClose>
-                    <Button onClick={() => onOpenChange(false)} className="bg-[#635bff] hover:bg-[#5851ea] text-white">
-                        Show Properties
+                <SheetFooter className="pt-6 border-t border-slate-100 sm:justify-between">
+                    <Button
+                        variant="ghost"
+                        className="text-slate-500 hover:text-slate-900 px-0 hover:bg-transparent"
+                        onClick={onClearFilters}
+                        disabled={!hasActiveFilters}
+                    >
+                        Clear all
                     </Button>
+                    <div className="flex gap-2">
+                        <SheetClose asChild>
+                            <Button variant="outline">Cancel</Button>
+                        </SheetClose>
+                        <Button onClick={() => onOpenChange(false)} className="bg-[#635bff] hover:bg-[#5851ea] text-white">
+                            Show Properties
+                        </Button>
+                    </div>
                 </SheetFooter>
             </SheetContent>
         </Sheet>
