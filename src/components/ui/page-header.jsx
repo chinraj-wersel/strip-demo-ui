@@ -6,7 +6,8 @@ export const PageHeader = ({
   searchPlaceholder = "Search",
   onSearchChange,
   searchValue,
-  showSearch = true
+  showSearch = true,
+  rightContent
 }) => {
   return (
     <div className="px-12 py-1 bg-background">
@@ -17,21 +18,24 @@ export const PageHeader = ({
             {title}
           </h1>
         </div>
-        {showSearch && (
-          <div className="flex-1 max-w-md ml-8">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder={searchPlaceholder}
-                value={searchValue}
-                onChange={(e) => onSearchChange?.(e.target.value)}
-                className="w-full px-4 py-2 pl-10 pr-10 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                style={{ fontSize: '0.875rem' }}
-              />
-              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+        <div className="flex items-center gap-4">
+          {showSearch && (
+            <div className="flex-1 max-w-md">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder={searchPlaceholder}
+                  value={searchValue}
+                  onChange={(e) => onSearchChange?.(e.target.value)}
+                  className="w-full px-4 py-2 pl-10 pr-10 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  style={{ fontSize: '0.875rem' }}
+                />
+                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              </div>
             </div>
-          </div>
-        )}
+          )}
+          {rightContent}
+        </div>
       </div>
     </div>
   );
