@@ -26,15 +26,15 @@ import {
   Building2,
   DollarSign,
   Wrench,
-  Folder,
-  MessageSquare,
+  File,
+  MessageCircle,
   HelpCircle,
   LogOut,
   Info,
   User,
 } from "lucide-react";
 import "./Sidebar.css";
- 
+
 const NAVIGATION = [
   {
     label: "MAIN",
@@ -75,23 +75,23 @@ const NAVIGATION = [
       },
       {
         title: "Files",
-        icon: Folder,
+        icon: File,
         href: "/Files",
       },
       {
         title: "Communication",
-        icon: MessageSquare,
+        icon: MessageCircle,
         href: "/Communication",
       },
     ],
   },
 ];
- 
+
 // Tooltip Component for collapsed state
 const Tooltip = ({ children, text, collapsed }) => {
   const [tooltipPosition, setTooltipPosition] = useState(null);
   const wrapperRef = useRef(null);
- 
+
   useEffect(() => {
     if (!collapsed && wrapperRef.current) {
       const updatePosition = () => {
@@ -103,20 +103,20 @@ const Tooltip = ({ children, text, collapsed }) => {
           });
         }
       };
- 
+
       updatePosition();
       window.addEventListener('scroll', updatePosition);
       window.addEventListener('resize', updatePosition);
- 
+
       return () => {
         window.removeEventListener('scroll', updatePosition);
         window.removeEventListener('resize', updatePosition);
       };
     }
   }, [collapsed]);
- 
+
   if (!collapsed) return children;
- 
+
   return (
     <div
       className="tooltip-wrapper"
@@ -146,11 +146,11 @@ const Tooltip = ({ children, text, collapsed }) => {
     </div>
   );
 };
- 
+
 // Inline Toast Component for menu items
 const InlineToast = ({ message, position, onClose }) => {
   if (!message) return null;
- 
+
   return (
     <div
       className="inline-toast"
@@ -173,7 +173,7 @@ const InlineToast = ({ message, position, onClose }) => {
     </div>
   );
 };
- 
+
 // Toggle Button with Tooltip Component
 const ToggleButtonWithTooltip = ({ collapsed, onToggleCollapse }) => {
   const [tooltipPosition, setTooltipPosition] = useState(null);
@@ -240,8 +240,8 @@ const BusinessSelector = ({ collapsed }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && 
-          buttonRef.current && !buttonRef.current.contains(event.target)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target) &&
+        buttonRef.current && !buttonRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
@@ -297,13 +297,13 @@ const BusinessSelector = ({ collapsed }) => {
         <ChevronDown className={`business-chevron ${isOpen ? 'open' : ''}`} />
       </button>
       {isOpen && (
-        <div 
+        <div
           className="business-dropdown"
           style={{
             position: 'fixed',
             top: `${dropdownPosition.top}px`,
             left: `${dropdownPosition.left}px`,
-            width:"220px",
+            width: "220px",
           }}
         >
           {/* Business Header */}
@@ -323,8 +323,8 @@ const BusinessSelector = ({ collapsed }) => {
 
           {/* Menu Options */}
           <div className="business-dropdown-menu">
-            <Link 
-              to={ROUTES.SETTINGS} 
+            <Link
+              to={ROUTES.SETTINGS}
               className="business-dropdown-item"
               onClick={() => setIsOpen(false)}
             >
@@ -368,7 +368,7 @@ const BusinessSelector = ({ collapsed }) => {
     </div>
   );
 };
- 
+
 // Search Component
 const SidebarSearch = ({ collapsed }) => {
   if (collapsed) {
@@ -380,7 +380,7 @@ const SidebarSearch = ({ collapsed }) => {
       </Tooltip>
     );
   }
- 
+
   return (
     <div className="sidebar-search">
       <Search className="sidebar-search-icon" />
@@ -388,12 +388,12 @@ const SidebarSearch = ({ collapsed }) => {
     </div>
   );
 };
- 
+
 // Navigation Link Component
 const NavLink = ({ item, active, onNavigate, collapsed, hasChildren, isExpanded, onToggle, onMenuClick }) => {
   const Icon = item.icon;
   const linkRef = useRef(null);
- 
+
   const handleClick = (e) => {
     if (onMenuClick && linkRef.current) {
       const rect = linkRef.current.getBoundingClientRect();
@@ -403,7 +403,7 @@ const NavLink = ({ item, active, onNavigate, collapsed, hasChildren, isExpanded,
       onNavigate();
     }
   };
- 
+
   const content = hasChildren ? (
     <Link
       ref={linkRef}
@@ -438,7 +438,7 @@ const NavLink = ({ item, active, onNavigate, collapsed, hasChildren, isExpanded,
       {!collapsed && <span className="xperty-nav-text">{item.title}</span>}
     </Link>
   );
- 
+
   // Don't show tooltip if item has children (submenu) - dropdown will show instead
   if (collapsed && !hasChildren) {
     return (
@@ -447,14 +447,14 @@ const NavLink = ({ item, active, onNavigate, collapsed, hasChildren, isExpanded,
       </Tooltip>
     );
   }
- 
+
   return content;
 };
- 
+
 // Sub Link Component
 const SubLink = ({ child, active, onNavigate, collapsed, onMenuClick }) => {
   const linkRef = useRef(null);
- 
+
   const handleClick = (e) => {
     if (onMenuClick && linkRef.current) {
       const rect = linkRef.current.getBoundingClientRect();
@@ -464,7 +464,7 @@ const SubLink = ({ child, active, onNavigate, collapsed, onMenuClick }) => {
       onNavigate();
     }
   };
- 
+
   return (
     <Link
       ref={linkRef}
@@ -476,7 +476,7 @@ const SubLink = ({ child, active, onNavigate, collapsed, onMenuClick }) => {
     </Link>
   );
 };
- 
+
 // Menu Item Wrapper Component
 const MenuItemWrapper = ({ item, location, collapsed, openItems, toggleAccordion, handleNavigate, onMenuClick }) => {
   const hasChildren = item.children && item.children.length > 0;
@@ -484,7 +484,7 @@ const MenuItemWrapper = ({ item, location, collapsed, openItems, toggleAccordion
   const [isHovered, setIsHovered] = useState(false);
   const wrapperRef = useRef(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
- 
+
   useEffect(() => {
     if (isHovered && wrapperRef.current && hasChildren) {
       const rect = wrapperRef.current.getBoundingClientRect();
@@ -494,7 +494,7 @@ const MenuItemWrapper = ({ item, location, collapsed, openItems, toggleAccordion
       });
     }
   }, [isHovered, hasChildren, collapsed]);
- 
+
   return (
     <div
       className="xperty-item-wrapper"
@@ -547,7 +547,7 @@ const MenuItemWrapper = ({ item, location, collapsed, openItems, toggleAccordion
     </div>
   );
 };
- 
+
 export const Sidebar = ({
   className = "",
   onNavigate,
@@ -561,11 +561,11 @@ export const Sidebar = ({
   const [openItems, setOpenItems] = useState(new Set());
   const { toast } = useToast();
   const [inlineToast, setInlineToast] = useState({ message: null, position: null });
- 
+
   const navSections = useMemo(() => {
     return NAVIGATION;
   }, []);
- 
+
   // Initialize open items based on current pathname
   useEffect(() => {
     const newOpenItems = new Set();
@@ -584,7 +584,7 @@ export const Sidebar = ({
     });
     setOpenItems(newOpenItems);
   }, [location.pathname, navSections]);
- 
+
   const toggleAccordion = (itemTitle) => {
     setOpenItems((prev) => {
       const newSet = new Set(prev);
@@ -596,13 +596,13 @@ export const Sidebar = ({
       return newSet;
     });
   };
- 
+
   const handleNavigate = () => {
     if (typeof onNavigate === "function") {
       onNavigate();
     }
   };
- 
+
   const handleMenuClick = (menuTitle, rect) => {
     if (rect) {
       // Show inline toast near the clicked icon
@@ -610,7 +610,7 @@ export const Sidebar = ({
       //   message: `Navigating to ${menuTitle}`,
       //   position: rect,
       // });
-     
+
       // Hide toast after 2 seconds
       setTimeout(() => {
         setInlineToast({ message: null, position: null });
@@ -623,9 +623,9 @@ export const Sidebar = ({
       // });
     }
   };
- 
+
   const sidebarClasses = `xperty-sidebar ${collapsed ? "collapsed" : "expanded"} ${className}`.trim();
- 
+
   return (
     <>
       {inlineToast.message && (
@@ -720,5 +720,4 @@ export const Sidebar = ({
     </>
   );
 };
- 
- 
+

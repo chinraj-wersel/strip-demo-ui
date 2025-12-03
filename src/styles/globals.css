@@ -1936,3 +1936,40 @@
 .dark .xperty-empty-text {
   color: #8898aa;
 }
+
+/* ============================================
+   HEADER TOOLTIP STYLES - Matches Sidebar Tooltip
+   ============================================ */
+
+.header-tooltip-content {
+  position: fixed;
+  transform: translateX(-50%);
+  background-color: #0a2540;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease 0.2s, visibility 0.1s ease 0.2s;
+  z-index: 99999;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.header-tooltip-content::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom-color: #0a2540;
+}
+
+.tooltip-wrapper:hover .header-tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}

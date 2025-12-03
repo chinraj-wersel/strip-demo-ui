@@ -19,6 +19,43 @@ import { SetupGuide } from "./SetupGuide";
 import { Assistant } from "./Assistant";
 import { ROUTES } from "@/app/constants";
 
+// Header Tooltip Component
+const HeaderTooltip = ({ children, text }) => {
+  const [tooltipPosition, setTooltipPosition] = useState(null);
+  const wrapperRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    if (wrapperRef.current) {
+      const rect = wrapperRef.current.getBoundingClientRect();
+      setTooltipPosition({
+        left: rect.left + rect.width / 2,
+        top: rect.bottom + 12,
+      });
+    }
+  };
+
+  return (
+    <div
+      className="tooltip-wrapper"
+      ref={wrapperRef}
+      onMouseEnter={handleMouseEnter}
+    >
+      {children}
+      {tooltipPosition && (
+        <div
+          className="header-tooltip-content"
+          style={{
+            left: `${tooltipPosition.left}px`,
+            top: `${tooltipPosition.top}px`,
+          }}
+        >
+          {text}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
   const [mounted, setMounted] = useState(false);
   const [showSetupGuide, setShowSetupGuide] = useState(false);
@@ -126,37 +163,42 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
           {/* RIGHT SECTION */}
           <div className="xperty-header-right">
             {/* Apps Grid Icon - xperty style 2x2 grid with plus */}
-            
+
 
             {/* Help Icon */}
-            <button
-              className={cn("xperty-header-icon-btn", showAssistant && "active")}
-              aria-label="Help"
-              onClick={() => {
-                setShowAssistant(!showAssistant);
-                if (!showAssistant) {
-                  setShowNotifications(false);
-                }
-              }}
-            >
-              <HelpCircle className="w-[18px] h-[18px]" />
-            </button>
-
-            {/* Notifications Bell Icon with Popup */}
-            <div className="xperty-notifications-wrapper" ref={notificationsRef}>
+            {/* Help Icon */}
+            <HeaderTooltip text="Help">
               <button
-                className={cn("xperty-header-icon-btn", showNotifications && "active")}
-                aria-label="Notifications"
+                className={cn("xperty-header-icon-btn", showAssistant && "active")}
+                aria-label="Help"
                 onClick={() => {
-                  setShowNotifications(!showNotifications);
-                  if (!showNotifications) {
-                    setShowAssistant(false);
-                    setShowSetupGuide(false);
+                  setShowAssistant(!showAssistant);
+                  if (!showAssistant) {
+                    setShowNotifications(false);
                   }
                 }}
               >
-                <Bell className="w-[18px] h-[18px]" />
+                <HelpCircle className="w-[18px] h-[18px]" />
               </button>
+            </HeaderTooltip>
+
+            {/* Notifications Bell Icon with Popup */}
+            <div className="xperty-notifications-wrapper" ref={notificationsRef}>
+              <HeaderTooltip text="Notifications">
+                <button
+                  className={cn("xperty-header-icon-btn", showNotifications && "active")}
+                  aria-label="Notifications"
+                  onClick={() => {
+                    setShowNotifications(!showNotifications);
+                    if (!showNotifications) {
+                      setShowAssistant(false);
+                      setShowSetupGuide(false);
+                    }
+                  }}
+                >
+                  <Bell className="w-[18px] h-[18px]" />
+                </button>
+              </HeaderTooltip>
 
               {/* Notifications Popup */}
               {showNotifications && (
@@ -196,23 +238,28 @@ export const Header = ({ onMenuClick, onSidebarToggle, sidebarCollapsed }) => {
             </div>
 
             {/* Settings Icon */}
-            <button
-              className="xperty-header-icon-btn"
-              aria-label="Settings"
-              onClick={() => navigate(ROUTES.SETTINGS)}
-            >
-              <Settings className="w-[18px] h-[18px]" />
-            </button>
+            {/* Settings Icon */}
+            <HeaderTooltip text="Settings">
+              <button
+                className="xperty-header-icon-btn"
+                aria-label="Settings"
+                onClick={() => navigate(ROUTES.SETTINGS)}
+              >
+                <Settings className="w-[18px] h-[18px]" />
+              </button>
+            </HeaderTooltip>
 
             {/* Add New Button - Purple circle with dropdown */}
             <div className="xperty-add-wrapper" ref={addMenuRef}>
-              <button
-                className={cn("xperty-add-btn", showAddMenu && "active")}
-                aria-label="Add new"
-                onClick={() => setShowAddMenu(!showAddMenu)}
-              >
-                <Plus className="w-4 h-4" strokeWidth={2.5} />
-              </button>
+              <HeaderTooltip text="Create">
+                <button
+                  className={cn("xperty-add-btn", showAddMenu && "active")}
+                  aria-label="Add new"
+                  onClick={() => setShowAddMenu(!showAddMenu)}
+                >
+                  <Plus className="w-4 h-4" strokeWidth={2.5} />
+                </button>
+              </HeaderTooltip>
 
               {/* Add Menu Popup */}
               {showAddMenu && (
